@@ -30,7 +30,11 @@ export default defineNuxtConfig({
     typedPages: true,
   },
 
-  modules: ["@pinia/nuxt", "@primevue/nuxt-module"],
+  modules: [
+    "@pinia/nuxt",
+    "@primevue/nuxt-module",
+    "@nuxtjs/tailwindcss",
+  ],
   primevue: {
     options: {
       theme: {
@@ -39,4 +43,3 @@ export default defineNuxtConfig({
     },
   },
 });
-
