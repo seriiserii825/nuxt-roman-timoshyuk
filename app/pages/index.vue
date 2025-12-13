@@ -1,4 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const triggerError = () => {
+  showError({
+    statusCode: 500,
+    statusMessage: 'Internal Server Error',
+    message: 'Something went wrong!'
+  })
+}
+</script>
 
 <template>
   <div class="index-page">
@@ -8,5 +16,6 @@
       perferendis temporibus ipsa placeat nesciunt. Quas corrupti architecto iste beatae labore,
       dolorum molestiae, nesciunt, impedit vero tempora minus!
     </p>
+    <Button label="Trigger Error" icon="pi pi-exclamation-triangle" severity="danger" @click="triggerError" class="mt-4" />
   </div>
 </template>
