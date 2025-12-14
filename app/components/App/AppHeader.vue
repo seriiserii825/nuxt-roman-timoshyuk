@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const is_auth = ref(true);
+const is_auth = ref(false);
 </script>
 
 <template>
@@ -14,7 +14,7 @@ const is_auth = ref(true);
       <Button label="Logout" icon="pi pi-sign-out" severity="help" />
     </div>
     <div v-else>
-      <NuxtLink to="/login">
+      <NuxtLink to="/auth">
         <Button label="Login" icon="pi pi-sign-in" severity="help" />
       </NuxtLink>
       <NuxtLink to="/register">

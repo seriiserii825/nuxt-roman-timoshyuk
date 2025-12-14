@@ -1,5 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import Aura from "@primeuix/themes/aura";
 export default defineNuxtConfig({
   devServer: {
     port: Number(process.env.NUXT_PORT) || 3000,
@@ -30,16 +29,10 @@ export default defineNuxtConfig({
     typedPages: true,
   },
 
-  modules: [
-    "@pinia/nuxt",
-    "@primevue/nuxt-module",
-    "@nuxtjs/tailwindcss",
-  ],
+  modules: ["@pinia/nuxt", "@primevue/nuxt-module", "@nuxtjs/tailwindcss"],
   primevue: {
     options: {
-      theme: {
-        preset: Aura,
-      },
+      unstyled: true, // This prevents PrimeVue from injecting its default styles
     },
   },
 });

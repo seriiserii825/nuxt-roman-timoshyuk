@@ -1,0 +1,32 @@
+.p-inputtext,
+input.p-inputtext,
+.p-component.p-inputtext {
+  @apply border border-slate-300 text-slate-600 px-3 py-2 indent-2 h-9 rounded-md outline-none transition duration-150 ease-in-out;
+  background-color: #f8fafc !important; /* slate-50 */
+}
+
+.p-inputtext:focus,
+input.p-inputtext:focus,
+.p-component.p-inputtext:focus {
+  @apply border-slate-600 ring-2 ring-slate-600/30;
+  background-color: #f8fafc !important;
+}
+
+.p-inputtext:disabled,
+input.p-inputtext:disabled,
+.p-component.p-inputtext:disabled {
+  @apply bg-slate-100 text-slate-400 cursor-not-allowed;
+}
+
+.p-inputtext.p-invalid,
+input.p-inputtext.p-invalid,
+.p-component.p-inputtext.p-invalid {
+  @apply border-red-500 text-red-600 placeholder-red-400;
+  background-color: #fef2f2 !important;
+}
+
+.p-inputtext::placeholder,
+input.p-inputtext::placeholder,
+.p-component.p-inputtext::placeholder {
+  @apply text-slate-400;
+}
