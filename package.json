@@ -16,6 +16,7 @@
     "@primevue/forms": "^4.5.3",
     "@primevue/nuxt-module": "^4.5.3",
     "@types/node": "^25.0.1",
+    "axios": "^1.13.2",
     "nuxt": "^4.2.1",
     "pinia": "^3.0.4",
     "primeicons": "^7.0.0",
