@@ -1,32 +1,37 @@
-.p-inputtext,
-input.p-inputtext,
-.p-component.p-inputtext {
-  @apply border border-slate-300 text-slate-600 px-3 py-2 indent-2 h-9 rounded-md outline-none transition duration-150 ease-in-out;
-  background-color: #f8fafc !important; /* slate-50 */
+// Put input styles at the END with maximum specificity
+input,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input:not([type]),
+.p-inputtext {
+  @apply border border-slate-300 text-slate-600 px-3 py-2 indent-2 h-12 rounded-md outline-none transition duration-150 ease-in-out !important;
+  background-color: #0f172a !important;
+  box-sizing: border-box !important;
 }
 
-.p-inputtext:focus,
-input.p-inputtext:focus,
-.p-component.p-inputtext:focus {
-  @apply border-slate-600 ring-2 ring-slate-600/30;
-  background-color: #f8fafc !important;
+input:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+  @apply border-slate-600 ring-2 ring-slate-600/30 !important;
+  background-color: #0f172a !important;
 }
 
-.p-inputtext:disabled,
-input.p-inputtext:disabled,
-.p-component.p-inputtext:disabled {
-  @apply bg-slate-100 text-slate-400 cursor-not-allowed;
+input:disabled {
+  @apply bg-slate-100 text-slate-400 cursor-not-allowed !important;
 }
 
-.p-inputtext.p-invalid,
-input.p-inputtext.p-invalid,
-.p-component.p-inputtext.p-invalid {
-  @apply border-red-500 text-red-600 placeholder-red-400;
-  background-color: #fef2f2 !important;
-}
-
-.p-inputtext::placeholder,
-input.p-inputtext::placeholder,
-.p-component.p-inputtext::placeholder {
+input::placeholder {
   @apply text-slate-400;
+}
+
+// Autofill override
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #0f172a inset !important;
+  -webkit-text-fill-color: #475569 !important;
+  transition: background-color 5000s ease-in-out 0s;
 }

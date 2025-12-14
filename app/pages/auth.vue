@@ -17,34 +17,26 @@ const onFormSubmit = (values: Record<string, any>) => {
     <h1 class="text-3xl font-bold mb-6">
       {{ is_login ? "Login" : "Register" }}
     </h1>
-    
+
     <div class="flex flex-col gap-4 w-full sm:w-96">
       <div class="flex flex-col gap-1">
         <InputText
-          class="input"
-          name="email"
-          type="text"
-          placeholder="email"
           v-model="form.email"
-          fluid
-          :ptOptions="{ mergeProps: true }"
-          :pt="{ root: { autocomplete: 'off' } }"
-        />
+          class="input"
+          name="custom_email"
+          type="email"
+          placeholder="Email" />
       </div>
-      
+
       <div class="flex flex-col gap-1">
         <InputText
           class="input"
-          name="password"
-          type="password"
+          name="custom_password"
+          type="text"
           placeholder="password"
-          v-model="form.password"
-          fluid
-          :ptOptions="{ mergeProps: true }"
-          :pt="{ root: { autocomplete: 'off' } }"
-        />
+          v-model="form.password" />
       </div>
-      
+
       <Button type="submit" class="bg-blue-700 text-white" label="Submit" @click="onFormSubmit" />
     </div>
   </div>
