@@ -33,11 +33,16 @@ const onFormSubmit = (values: Record<string, any>) => {
           class="input"
           name="custom_password"
           type="text"
-          placeholder="password"
+          placeholder="Password"
           v-model="form.password" />
       </div>
 
-      <Button type="submit" class="bg-blue-700 text-white" label="Submit" @click="onFormSubmit" />
+      <Button type="submit" class="btn btn-info" label="Submit" @click="onFormSubmit" />
+      <div class="mt-4 text-center">
+        <a href="#" class="text-blue-500 hover:underline" @click.prevent="is_login = !is_login">
+          {{ is_login ? "Don't have an account? Register" : "Already have an account? Login" }}
+        </a>
+      </div>
     </div>
   </div>
 </template>
