@@ -1,10 +1,10 @@
 <script setup lang="ts">
 const triggerError = () => {
-  showError({
-    statusCode: 500,
-    statusMessage: "Internal Server Error",
-    message: "An unexpected error occurred.",
-  });
+  // showError({
+  //   statusCode: 500,
+  //   statusMessage: "Internal Server Error",
+  //   message: "An unexpected error occurred.",
+  // });
 };
 </script>
 

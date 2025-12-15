@@ -1,14 +1,35 @@
 <script setup lang="ts">
+import { authService } from "~/api/services/authService";
+import { LocalStorage } from "~/helpers/LocalStorage";
+
 definePageMeta({
   layout: "login",
 });
+
 const is_login = ref(false);
+
 const form = ref({
-  email: "",
-  password: "",
+  email: "seriiburduja@gmail.com",
+  password: "123456",
 });
-const onFormSubmit = (values: Record<string, any>) => {
-  console.log("Form submitted with values:", values);
+const onRegister = async () => {
+  try {
+    await authService.register(form.value);
+    is_login.value = true;
+  } catch (error) {
+    handleAxiosError(error);
+  }
+};
+const onLogin = async () => {
+  try {
+    const {
+      data: { access_token },
+    } = await authService.login(form.value);
+    LocalStorage.setItem("token", access_token);
+    await navigateTo("/");
+  } catch (error) {
+    handleAxiosError(error);
+  }
 };
 </script>
 
@@ -37,7 +58,13 @@ const onFormSubmit = (values: Record<string, any>) => {
           v-model="form.password" />
       </div>
 
-      <Button type="submit" class="btn btn-info" label="Submit" @click="onFormSubmit" />
+      <Button
+        v-if="!is_login"
+        type="submit"
+        class="btn btn-info"
+        label="Submit"
+        @click="onRegister" />
+      <Button v-else type="submit" class="btn btn-info" label="Submit" @click="onLogin" />
       <div class="mt-4 text-center">
         <a href="#" class="text-blue-500 hover:underline" @click.prevent="is_login = !is_login">
           {{ is_login ? "Don't have an account? Register" : "Already have an account? Login" }}
