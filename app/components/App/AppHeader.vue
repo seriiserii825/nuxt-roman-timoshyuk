@@ -14,11 +14,11 @@ const is_auth = ref(false);
       <Button label="Logout" icon="pi pi-sign-out" severity="help" />
     </div>
     <div v-else>
-      <NuxtLink to="/auth">
-        <Button label="Login" icon="pi pi-sign-in" severity="help" />
+      <NuxtLink to="/auth?login=true">
+        <Button class="btn" label="Login" icon="pi pi-sign-in" severity="help" />
       </NuxtLink>
-      <NuxtLink to="/register">
-        <Button label="Register" icon="pi pi-user-plus" severity="info" class="ml-2" />
+      <NuxtLink to="/auth?login=false">
+        <Button class="btn btn-info ml-2" label="Register" icon="pi pi-user-plus" severity="info" />
       </NuxtLink>
     </div>
   </div>

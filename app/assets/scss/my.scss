@@ -23,7 +23,7 @@
     @apply mx-auto px-4 max-w-[1000px];
   }
   .btn {
-    @apply bg-blue-600 text-white px-4 py-3 rounded hover:bg-blue-700 transition;
+    @apply inline-flex justify-center items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition;
   }
 }
 
@@ -32,13 +32,13 @@
     @apply bg-green-600 text-white px-4 py-3 rounded hover:bg-green-700 transition;
   }
   .btn-danger {
-    @apply bg-red-600 text-white px-4 py-3 rounded hover:bg-red-700 transition;
+    @apply bg-red-600 text-white hover:bg-red-700;
   }
   .btn-warning {
-    @apply bg-yellow-500 text-white px-4 py-3 rounded hover:bg-yellow-600 transition;
+    @apply bg-yellow-600 text-white hover:bg-yellow-700;
   }
   .btn-info {
-    @apply bg-teal-600 text-white px-4 py-3 rounded hover:bg-teal-700 transition;
+    @apply bg-cyan-600 text-white hover:bg-cyan-700;
   }
 }
 

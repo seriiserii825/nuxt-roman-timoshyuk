@@ -6,7 +6,10 @@ definePageMeta({
   layout: "login",
 });
 
-const is_login = ref(false);
+const route = useRoute();
+const login = route.query.login;
+
+const is_login = ref(login === "true");
 
 const form = ref({
   email: "seriiburduja@gmail.com",
@@ -69,6 +72,15 @@ const onLogin = async () => {
         <a href="#" class="text-blue-500 hover:underline" @click.prevent="is_login = !is_login">
           {{ is_login ? "Don't have an account? Register" : "Already have an account? Login" }}
         </a>
+      </div>
+      <div class="mt-4 text-center">
+        <NuxtLink to="/">
+          <Button
+            class="btn btn-success"
+            label="Back to Home"
+            icon="pi pi-home"
+            severity="secondary" />
+        </NuxtLink>
       </div>
     </div>
   </div>
