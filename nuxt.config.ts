@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devServer: {
-    port: Number(process.env.NUXT_PORT) || 3000,
+    port: Number(process.env.NUXT_PORT) || 3444,
   },
 
   compatibilityDate: "2025-07-15",
