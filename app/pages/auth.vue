@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { authService } from "~/api/services/authService";
+import useSweetAlert from "~/composable/useSweetAlert";
 import { LocalStorage } from "~/helpers/LocalStorage";
 
 definePageMeta({
@@ -19,6 +20,7 @@ const onRegister = async () => {
   try {
     await authService.register(form.value);
     is_login.value = true;
+    useSweetAlert("success", "Registration successful! Please log in.");
   } catch (error) {
     handleAxiosError(error);
   }
@@ -29,6 +31,7 @@ const onLogin = async () => {
       data: { access_token },
     } = await authService.login(form.value);
     LocalStorage.setItem("token", access_token);
+    useSweetAlert("success", "Login successful!");
     await navigateTo("/");
   } catch (error) {
     handleAxiosError(error);
