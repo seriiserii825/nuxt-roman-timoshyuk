@@ -1,5 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.NUXT_PUBLIC_API_BASE,
+    },
+  },
   devServer: {
     port: Number(process.env.NUXT_PORT) || 3444,
   },
@@ -29,11 +34,7 @@ export default defineNuxtConfig({
     typedPages: true,
   },
 
-  modules: [
-    "@pinia/nuxt",
-    "@primevue/nuxt-module",
-    "@nuxtjs/tailwindcss",
-  ],
+  modules: ["@pinia/nuxt", "@primevue/nuxt-module", "@nuxtjs/tailwindcss"],
   primevue: {
     options: {
       unstyled: true, // This prevents PrimeVue from injecting its default styles
