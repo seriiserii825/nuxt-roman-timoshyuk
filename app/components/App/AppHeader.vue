@@ -1,5 +1,16 @@
 <script setup lang="ts">
-const is_auth = ref(false);
+import useSweetAlert from "~/composable/useSweetAlert";
+import { LocalStorage } from "~/helpers/LocalStorage";
+
+const is_auth = useIsLoggedIn();
+const auth_store = useAuthStore();
+
+function logout() {
+  auth_store.setEmail(null);
+  LocalStorage.removeItem("token");
+  useSweetAlert("success", "Logout successful!");
+  navigateTo("/auth?login=true");
+}
 </script>
 
 <template>
@@ -11,7 +22,12 @@ const is_auth = ref(false);
       <NuxtLink to="/transactions">Transactions</NuxtLink>
     </nav>
     <div v-if="is_auth">
-      <Button label="Logout" icon="pi pi-sign-out" severity="help" />
+      <Button
+        @click="logout"
+        class="btn btn-danger"
+        label="Logout"
+        icon="pi pi-sign-out"
+        severity="help" />
     </div>
     <div v-else>
       <NuxtLink to="/auth?login=true">

@@ -7,7 +7,7 @@ export default function useSweetAlert(
 
   return $swal.fire({
     toast: true,
-    position: "top-end",
+    position: "bottom-end",
     icon,
     title,
     text,

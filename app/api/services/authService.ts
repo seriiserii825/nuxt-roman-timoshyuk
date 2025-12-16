@@ -1,6 +1,8 @@
 import type { IAuthPayload } from "~/interfaces/IAuthPayload";
 import { axiosInstance } from "../axiosInstance";
 
+const auth_store = useAuthStore();
+
 export const authService = {
   login: async (payload: IAuthPayload): Promise<{ data: { access_token: string } }> => {
     return axiosInstance.post("/auth/login", payload);
@@ -12,6 +14,7 @@ export const authService = {
     return axiosInstance.post("/users", payload);
   },
   getMe: async () => {
-    // Simulate an API call to get the current user info
+    const response = await axiosInstance.get("/auth/profile");
+    auth_store.setEmail(response.data.email);
   },
 };
