@@ -3,5 +3,8 @@ export const useAuthStore = defineStore("auth", () => {
   function setEmail(newEmail: string | null) {
     email.value = newEmail;
   }
-  return { email, setEmail };
+  function reset() {
+    email.value = null;
+  }
+  return { email, setEmail, reset };
 });

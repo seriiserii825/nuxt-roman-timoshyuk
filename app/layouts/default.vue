@@ -4,7 +4,7 @@ import { authService } from "~/api/services/authService";
 try {
   await authService.getMe();
 } catch (error) {
-  handleAxiosError(error);
+  navigateTo("/auth?login=true");
 }
 </script>
 
