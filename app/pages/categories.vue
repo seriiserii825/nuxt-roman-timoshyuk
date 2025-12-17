@@ -81,13 +81,15 @@ onMounted(() => {
         >
           <span>{{ category.title }}</span>
           <div
-            class="pointer-events-none absolute inset-0 flex items-center justify-between rounded-lg bg-black/90 px-3 opacity-0 transition-opacity duration-200 group-hover:pointer-events-auto group-hover:opacity-100"
+            class="pointer-events-none absolute inset-0 flex items-center justify-between gap-2 min-w-16 rounded-lg bg-black/90 px-3 opacity-0 transition-opacity duration-200 group-hover:pointer-events-auto group-hover:opacity-100"
           >
             <i
               @click="updateFunc(category.id)"
-              class="pi pi-pen-to-square transition-colors hover:text-green-600"
+              class="pi pi-pen-to-square inline-block transition-colors hover:text-green-600"
             />
-            <i class="pi pi-trash transition-colors hover:text-red-600" />
+            <i
+              class="pi pi-trash inline-block transition-colors hover:text-red-600"
+            />
           </div>
         </div>
       </template>
