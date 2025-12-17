@@ -40,7 +40,7 @@ const onLogin = async () => {
 </script>
 
 <template>
-  <div class="mt-40 flex flex-col justify-center items-center py-6">
+  <div class="mt-40 mx-auto max-w-md w-full flex flex-col justify-center items-center py-6">
     <h1 class="text-3xl font-bold mb-6">
       {{ is_login ? "Login" : "Register" }}
     </h1>
