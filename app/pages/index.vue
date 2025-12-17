@@ -1,13 +1,11 @@
 <script setup lang="ts">
-const triggerError = () => {
-  // showError({
-  //   statusCode: 500,
-  //   statusMessage: "Internal Server Error",
-  //   message: "An unexpected error occurred.",
-  // });
-};
+definePageMeta({
+  middleware: "auth",
+});
 </script>
 
 <template>
-  <Button @click="triggerError" class="mt-8">Trigger Error</Button>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam distinctio consequatur id
+  corrupti voluptate asperiores tempore, fuga accusamus eligendi rerum enim illum aut vel quam vitae
+  dignissimos assumenda eaque! Esse.
 </template>
