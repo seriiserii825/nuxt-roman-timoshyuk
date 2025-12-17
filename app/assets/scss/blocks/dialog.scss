@@ -1,0 +1,12 @@
+.dialog {
+  [data-pc-section="header"] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+}
+[data-p="modal"][data-pc-section="mask"] {
+  background: rgba(0, 0, 0, 0.8);
+}
