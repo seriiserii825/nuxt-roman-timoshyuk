@@ -64,6 +64,20 @@ function updateFunc(categoryId: number) {
   create_category_form.value.title = category.title;
   is_visible_category_popup.value = true;
 }
+const deleteCategory = async (id: number) => {
+  const result = await useSweetConfirm(
+    "Delete category?",
+    "This action cannot be undone",
+    "Delete",
+    "Cancel",
+  );
+
+  if (!result.isConfirmed) return;
+
+  await categoryService.delete(id);
+  await getCategories();
+  useSweetAlert("success", "Category deleted");
+};
 
 onMounted(() => {
   getCategories();
@@ -81,13 +95,14 @@ onMounted(() => {
         >
           <span>{{ category.title }}</span>
           <div
-            class="pointer-events-none absolute inset-0 flex items-center justify-between gap-2 min-w-16 rounded-lg bg-black/90 px-3 opacity-0 transition-opacity duration-200 group-hover:pointer-events-auto group-hover:opacity-100"
+            class="pointer-events-none absolute inset-0 flex min-w-16 items-center justify-between gap-2 rounded-lg bg-black/90 px-3 opacity-0 transition-opacity duration-200 group-hover:pointer-events-auto group-hover:opacity-100"
           >
             <i
               @click="updateFunc(category.id)"
               class="pi pi-pen-to-square inline-block transition-colors hover:text-green-600"
             />
             <i
+              @click="deleteCategory(category.id)"
               class="pi pi-trash inline-block transition-colors hover:text-red-600"
             />
           </div>
