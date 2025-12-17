@@ -3,16 +3,23 @@ export default function useSweetAlert(
   title: string,
   text = ""
 ) {
-  const { $swal } = useNuxtApp();
+  // Use tryUseNuxtApp to safely get the nuxt context
+  const nuxtApp = tryUseNuxtApp();
 
-  return $swal.fire({
-    toast: true,
-    position: "bottom-end",
-    icon,
-    title,
-    text,
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-  });
+  if (nuxtApp?.$swal) {
+    return nuxtApp.$swal.fire({
+      toast: true,
+      position: "bottom-end",
+      icon,
+      title,
+      text,
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    });
+  } else {
+    // Fallback for when plugin isn't loaded yet
+    console.warn("[SweetAlert]", title, text);
+    return Promise.resolve();
+  }
 }
