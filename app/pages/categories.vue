@@ -21,5 +21,11 @@ definePageMeta({
         </div>
       </div>
     </div>
+    <div
+      class="mt-4 flex cursor-pointer items-center gap-3 text-white/50 transition-colors hover:text-white"
+    >
+      <i class="pi pi-plus" />
+      Create a new category
+    </div>
   </div>
 </template>
