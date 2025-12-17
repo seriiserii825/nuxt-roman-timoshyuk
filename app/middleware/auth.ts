@@ -1,19 +1,17 @@
-import {authService} from "~/api/services/authService";
-import {LocalStorage} from "~/helpers/LocalStorage";
+import { authService } from "~/api/services/authService";
+import { LocalStorage } from "~/helpers/LocalStorage";
 
 export default defineNuxtRouteMiddleware(async () => {
-  const auth = useAuthStore();
+  const authStore = useAuthStore();
 
-  // already checked
-  if (!auth.email) {
-    return navigateTo("/auth?login=true");
+  // already authenticated
+  if (authStore.email) {
+    return;
   }
 
   try {
-    await authService.getMe()
+    await authService.getMe();
   } catch (error) {
-    auth.reset();
-    LocalStorage.clear()
     return navigateTo("/auth?login=true");
   }
 });
