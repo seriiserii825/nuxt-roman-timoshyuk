@@ -5,12 +5,20 @@ definePageMeta({
 </script>
 
 <template>
-  <div>
-  <div class="">transactions</div>
-  <p class="text-lg">
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus voluptate saepe optio
-    perferendis temporibus ipsa placeat nesciunt. Quas corrupti architecto iste beatae labore,
-    dolorum molestiae, nesciunt, impedit vero tempora minus!
-  </p>
+  <div class="mt-4 grid grid-cols-3 items-start gap-4">
+    <div class="col-span-2 grid">Add transaction form</div>
+    <div class="rounded-md bg-slate-800 p-3">
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <p class="text-md text-center font-bold uppercase">Total income:</p>
+          <p class="mt-2 rounded-sm bg-green-600 p-1 text-center">1000$</p>
+        </div>
+        <div>
+          <p class="text-md text-center font-bold uppercase">Total Expense:</p>
+          <p class="mt-2 rounded-sm bg-red-500 p-1 text-center">1000$</p>
+        </div>
+      </div>
+      chart
+    </div>
   </div>
 </template>
