@@ -124,14 +124,12 @@ onMounted(() => {
           autocomplete="off"
         />
       </div>
-      <button
-        type="button"
-        class="btn"
+      <Btn
         :disabled="create_category_form.title.length === 0"
-        @click="is_creating_category ? createCategory() : updateCategory()"
+        @emit_click="is_creating_category ? createCategory() : updateCategory()"
       >
         Submit
-      </button>
+      </Btn>
     </CustomModal>
   </div>
 </template>
