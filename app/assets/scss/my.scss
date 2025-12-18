@@ -1,10 +1,6 @@
 @use "./partials/variables";
 @use "./partials/base";
 @use "./blocks/input";
-@use "primeicons/primeicons.css";
 @use "blocks/dialog";
 @use "blocks/tailwind";
 
-.router-link-exact-active {
-  @apply text-white underline;
-}

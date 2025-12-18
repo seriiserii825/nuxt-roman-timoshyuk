@@ -2,25 +2,17 @@
 import { categoryService } from "~/api/services/categoryService";
 import useSweetAlert from "~/composable/useSweetAlert";
 import type { ICategoriesResponse } from "~/interfaces/ICategoriesResponse";
-
 definePageMeta({
   middleware: "auth",
 });
-
 const create_category_form = ref({
   title: "",
 });
-
 const is_loading = ref(false);
-
 const selected_category_id = ref<number | null>(null);
-
 const is_creating_category = ref(true);
-
 const categories = ref<ICategoriesResponse[]>([]);
-
 const is_visible_category_popup = ref(false);
-
 async function createCategory() {
   try {
     await categoryService.create({
@@ -34,7 +26,6 @@ async function createCategory() {
     handleAxiosError(error);
   }
 }
-
 async function getCategories() {
   is_loading.value = true;
   try {
@@ -48,7 +39,6 @@ async function getCategories() {
     }, 800);
   }
 }
-
 async function updateCategory() {
   if (selected_category_id.value === null) return;
   try {
@@ -62,7 +52,6 @@ async function updateCategory() {
     handleAxiosError(error);
   }
 }
-
 function updateFunc(categoryId: number) {
   const category = categories.value.find((cat) => cat.id === categoryId);
   if (!category) return;
@@ -78,19 +67,15 @@ const deleteCategory = async (id: number) => {
     "Delete",
     "Cancel",
   );
-
   if (!result.isConfirmed) return;
-
   await categoryService.delete(id);
   await getCategories();
   useSweetAlert("success", "Category deleted");
 };
-
 onMounted(() => {
   getCategories();
 });
 </script>
-
 <template>
   <div class="mt-10 rounded-md bg-slate-800 p-4">
     <div class="mt-2 flex flex-wrap items-center gap-2">
@@ -129,7 +114,7 @@ onMounted(() => {
       v-model:is_visible="is_visible_category_popup"
     >
       <div class="mb-4 flex items-center gap-4">
-        <InputText
+        <input
           id="category"
           v-model="create_category_form.title"
           placeholder="Category title"
@@ -137,13 +122,12 @@ onMounted(() => {
           autocomplete="off"
         />
       </div>
-      <Button
+      <button
         type="button"
         class="btn"
-        label="Submit"
         :disabled="create_category_form.title.length === 0"
         @click="is_creating_category ? createCategory() : updateCategory()"
-      ></Button>
+      >Submit</button>
     </CustomModal>
   </div>
 </template>
