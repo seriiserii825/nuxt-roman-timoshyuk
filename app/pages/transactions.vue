@@ -7,17 +7,29 @@ definePageMeta({
   middleware: "auth",
 });
 
+const transaction_is_loading = ref(false);
+
 const transactions = ref<ITransaction[]>([]);
 
 async function getTransactions() {
   try {
+    transaction_is_loading.value = true;
     const response = await transactionService.getAll();
     transactions.value = response.data;
   } catch (error) {
     handleAxiosError(error);
     useSweetAlert("error", "Failed to fetch transactions");
+  } finally {
+    setTimeout(() => {
+      transaction_is_loading.value = false;
+    }, 1000);
   }
 }
+
+async function emitTransactions() {
+  await getTransactions();
+}
+
 onMounted(() => {
   getTransactions();
 });
@@ -27,7 +39,7 @@ onMounted(() => {
   <div>
     <div class="mt-4 grid grid-cols-3 items-start gap-4">
       <div class="col-span-2 grid">
-        <FormTransaction class="mb-4" />
+        <FormTransaction class="mb-4" @emit_transaction="emitTransactions" />
       </div>
       <div class="shape">
         <div class="grid grid-cols-2 gap-3">
@@ -48,6 +60,7 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <TransactionTable :transactions="transactions" v-if="transactions" />
+    <Preloader v-if="transaction_is_loading" />
+    <TransactionTable :transactions="transactions" v-else-if="transactions" />
   </div>
 </template>

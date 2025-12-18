@@ -5,6 +5,8 @@ import useSweetAlert from "~/composable/useSweetAlert";
 import type { ICategoriesResponse } from "~/interfaces/ICategoriesResponse";
 import type { ISelectOption } from "~/interfaces/ISelectOption";
 
+const emits = defineEmits(['emit_transaction'])
+
 const form = ref({
   title: "",
   amount: 0,
@@ -14,8 +16,11 @@ const form = ref({
 
 const categories = ref<ISelectOption[]>();
 
+const categories_is_loading = ref(false);
+
 async function fetchCategories() {
   try {
+    categories_is_loading.value = true;
     const response = await categoryService.getAll();
     const data = response.data;
     if (data) {
@@ -24,17 +29,33 @@ async function fetchCategories() {
         value: category.id,
       }));
     }
-  } catch (error) {}
+  } catch (error) {
+    handleAxiosError(error);
+    useSweetAlert("error", "Failed to fetch categories", "error");
+  } finally {
+    setTimeout(() => {
+      categories_is_loading.value = false;
+    }, 600);
+  }
 }
 
 async function onSubmit() {
   try {
     await transactionService.create(form.value);
     useSweetAlert("success", "Transaction added successfully", "success");
+    emits('emit_transaction')
+    resetForm();
   } catch (error) {
     handleAxiosError(error);
     useSweetAlert("error", "Failed to add transaction", "error");
   }
+}
+
+function resetForm() {
+  form.value.title = "";
+  form.value.amount = 0;
+  form.value.type = "income";
+  form.value.category = 0;
 }
 
 const form_are_valid = computed(() => {
@@ -91,8 +112,9 @@ onMounted(() => {
         <span>Expense</span>
       </label>
     </div>
+    <Preloader v-if="categories_is_loading" />
     <FormSelect
-      v-if="categories"
+      v-else-if="categories"
       label="Manage Category"
       name="category"
       :options="categories"
