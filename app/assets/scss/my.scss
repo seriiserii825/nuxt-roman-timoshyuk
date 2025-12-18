@@ -2,45 +2,8 @@
 @use "./partials/base";
 @use "./blocks/input";
 @use "primeicons/primeicons.css";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  body {
-    @apply bg-gray-100 text-sm;
-  }
-  td {
-    @apply capitalize text-white/70;
-  }
-  thead td {
-    @apply text-white;
-  }
-}
-
-@layer components {
-  .container {
-    @apply mx-auto px-4 max-w-[1000px];
-  }
-  .btn {
-    @apply inline-flex justify-center items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition;
-  }
-}
-
-@layer utilities {
-  .btn-success {
-    @apply bg-green-600 text-white px-4 py-3 rounded hover:bg-green-700 transition;
-  }
-  .btn-danger {
-    @apply bg-red-600 text-white hover:bg-red-700;
-  }
-  .btn-warning {
-    @apply bg-yellow-600 text-white hover:bg-yellow-700;
-  }
-  .btn-info {
-    @apply bg-cyan-600 text-white hover:bg-cyan-700;
-  }
-}
+@use "blocks/dialog";
+@use "blocks/tailwind";
 
 .router-link-exact-active {
   @apply text-white underline;
