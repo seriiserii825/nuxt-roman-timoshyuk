@@ -26,7 +26,10 @@ function logout() {
       <NuxtLink to="/transactions">Transactions</NuxtLink>
     </nav>
     <div v-if="is_auth">
-      <button @click="logout" class="btn btn-danger">Logout</button>
+      <button @click="logout" class="btn btn-danger">
+        <font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" />
+        Logout
+      </button>
     </div>
     <div v-else>
       <NuxtLink to="/auth?login=true">

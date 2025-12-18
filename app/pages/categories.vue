@@ -90,13 +90,15 @@ onMounted(() => {
           <div
             class="pointer-events-none absolute inset-0 flex min-w-16 items-center justify-between gap-2 rounded-lg bg-black/90 px-3 opacity-0 transition-opacity duration-200 group-hover:pointer-events-auto group-hover:opacity-100"
           >
-            <i
+            <font-awesome-icon
               @click="updateFunc(category.id)"
-              class="pi pi-pen-to-square inline-block transition-colors hover:text-green-600"
+              :icon="['fas', 'pen-to-square']"
+              class="inline-block cursor-pointer text-white transition-all hover:scale-110 hover:text-blue-400"
             />
-            <i
+            <font-awesome-icon
               @click="deleteCategory(category.id)"
-              class="pi pi-trash inline-block transition-colors hover:text-red-600"
+              :icon="['fas', 'trash']"
+              class="inline-block cursor-pointer text-white transition-all hover:scale-110 hover:text-red-600"
             />
           </div>
         </div>
@@ -104,9 +106,9 @@ onMounted(() => {
     </div>
     <div
       @click="is_visible_category_popup = true"
-      class="mt-4 flex cursor-pointer items-center gap-3 text-white/50 transition-colors hover:text-white"
+      class="mb-4 mt-4 flex cursor-pointer items-center gap-1 text-white/50 transition-colors hover:text-white"
     >
-      <i class="pi pi-plus" />
+      <font-awesome-icon icon="fa-solid fa-plus" />
       {{ is_creating_category ? "Create new category" : "Update category" }}
     </div>
     <CustomModal
@@ -127,7 +129,9 @@ onMounted(() => {
         class="btn"
         :disabled="create_category_form.title.length === 0"
         @click="is_creating_category ? createCategory() : updateCategory()"
-      >Submit</button>
+      >
+        Submit
+      </button>
     </CustomModal>
   </div>
 </template>
