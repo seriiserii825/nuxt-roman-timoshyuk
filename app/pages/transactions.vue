@@ -6,7 +6,9 @@ definePageMeta({
 
 <template>
   <div class="mt-4 grid grid-cols-3 items-start gap-4">
-    <div class="col-span-2 grid">Add transaction form</div>
+    <div class="col-span-2 grid">
+      <FormTransaction />
+    </div>
     <div class="shape">
       <div class="grid grid-cols-2 gap-3">
         <div>
