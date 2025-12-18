@@ -8,7 +8,7 @@ const form = ref({
 
 <template>
   <div class="shape">
-    <div class="grid grid-cols-2 gap-3">
+    <div class="grid grid-cols-2 gap-3 mb-4">
       <FormInput
         label="Title"
         name="title"
@@ -23,6 +23,26 @@ const form = ref({
         placeholder="Enter amount"
         v-model="form.amount"
       />
+    </div>
+    <div class="flex items-center gap-2">
+      <label class="flex cursor-pointer items-center gap-2">
+        <input
+          type="radio"
+          value="income"
+          v-model="form.type"
+          class="form-radio text-blue-600"
+        />
+        <span>Income</span>
+      </label>
+      <label class="flex cursor-pointer items-center gap-2">
+        <input
+          type="radio"
+          value="expense"
+          v-model="form.type"
+          class="form-radio text-blue-600"
+        />
+        <span>Expense</span>
+      </label>
     </div>
   </div>
 </template>
