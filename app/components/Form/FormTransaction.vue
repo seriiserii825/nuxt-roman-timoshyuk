@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { categoryService } from "~/api/services/categoryService";
+import { transactionService } from "~/api/services/transactionService";
+import useSweetAlert from "~/composable/useSweetAlert";
 import type { ICategoriesResponse } from "~/interfaces/ICategoriesResponse";
 import type { ISelectOption } from "~/interfaces/ISelectOption";
-
-const categories_response = ref<ICategoriesResponse[]>([]);
 
 const form = ref({
   title: "",
   amount: 0,
-  type: "income",
-  category: "",
+  type: "income" as "income" | "expense",
+  category: 0,
 });
 
 const categories = ref<ISelectOption[]>();
@@ -26,6 +26,26 @@ async function fetchCategories() {
     }
   } catch (error) {}
 }
+
+async function onSubmit() {
+  try {
+    await transactionService.create(form.value);
+    useSweetAlert("success", "Transaction added successfully", "success");
+  } catch (error) {
+    handleAxiosError(error);
+    useSweetAlert("error", "Failed to add transaction", "error");
+  }
+}
+
+const form_are_valid = computed(() => {
+  return (
+    form.value.title.trim() !== "" &&
+    form.value.amount > 0 &&
+    (form.value.type === "income" || form.value.type === "expense") &&
+    form.value.category > 0
+  );
+});
+
 onMounted(() => {
   fetchCategories();
 });
@@ -79,6 +99,13 @@ onMounted(() => {
       v-model="form.category"
       class="mb-8"
     />
-    <Btn type="submit" class="w-fit" variant="btn-success">Add Transaction</Btn>
+    <Btn
+      type="submit"
+      class="w-fit"
+      variant="btn-success"
+      @emit_click="onSubmit"
+      :disabled="!form_are_valid"
+      >Add Transaction</Btn
+    >
   </div>
 </template>
