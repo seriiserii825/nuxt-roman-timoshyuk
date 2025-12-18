@@ -1,0 +1,110 @@
+:root {
+  /* Base Select Styles */
+  --p-select-background: #1e293b;
+  --p-select-disabled-background: #0f172a;
+  --p-select-filled-background: #1e293b;
+  --p-select-filled-hover-background: #334155;
+  --p-select-filled-focus-background: #1e293b;
+
+  /* Border Colors */
+  --p-select-border-color: #334155;
+  --p-select-hover-border-color: #475569;
+  --p-select-focus-border-color: #3b82f6;
+  --p-select-invalid-border-color: #ef4444;
+
+  /* Text Colors */
+  --p-select-color: #e2e8f0;
+  --p-select-disabled-color: #64748b;
+  --p-select-placeholder-color: #94a3b8;
+  --p-select-invalid-placeholder-color: #fca5a5;
+
+  /* Shadows and Effects */
+  --p-select-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --p-select-focus-ring-width: 2px;
+  --p-select-focus-ring-style: solid;
+  --p-select-focus-ring-color: rgba(59, 130, 246, 0.3);
+  --p-select-focus-ring-offset: 0px;
+  --p-select-focus-ring-shadow: 0 0 0 var(--p-select-focus-ring-width)
+    var(--p-select-focus-ring-color);
+
+  /* Padding and Sizing */
+  --p-select-padding-x: 0.75rem;
+  --p-select-padding-y: 0.625rem;
+  --p-select-border-radius: 0.5rem;
+
+  /* Transitions */
+  --p-select-transition-duration: 0.2s;
+
+  /* Size Variants - Small */
+  --p-select-sm-font-size: 0.875rem;
+  --p-select-sm-padding-x: 0.625rem;
+  --p-select-sm-padding-y: 0.5rem;
+
+  /* Size Variants - Large */
+  --p-select-lg-font-size: 1.125rem;
+  --p-select-lg-padding-x: 0.875rem;
+  --p-select-lg-padding-y: 0.75rem;
+
+  /* Dropdown Styles */
+  --p-select-dropdown-width: 2.5rem;
+  --p-select-dropdown-color: #94a3b8;
+
+  /* Overlay/Panel Styles */
+  --p-select-overlay-background: #1e293b;
+  --p-select-overlay-border-color: #334155;
+  --p-select-overlay-border-radius: 0.5rem;
+  --p-select-overlay-color: #e2e8f0;
+  --p-select-overlay-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+
+  /* List Styles */
+  --p-select-list-padding: 0.5rem;
+  --p-select-list-gap: 0.125rem;
+  --p-select-list-header-padding: 0.625rem 1rem;
+
+  /* Option Styles */
+  --p-select-option-focus-background: #334155;
+  --p-select-option-selected-background: #3b82f6;
+  --p-select-option-selected-focus-background: #2563eb;
+  --p-select-option-color: #e2e8f0;
+  --p-select-option-focus-color: #f1f5f9;
+  --p-select-option-selected-color: #ffffff;
+  --p-select-option-selected-focus-color: #ffffff;
+  --p-select-option-padding: 0.625rem 1rem;
+  --p-select-option-border-radius: 0.375rem;
+
+  /* Option Group Styles */
+  --p-select-option-group-background: #0f172a;
+  --p-select-option-group-color: #94a3b8;
+  --p-select-option-group-font-weight: 600;
+  --p-select-option-group-padding: 0.625rem 1rem;
+
+  /* Icon Styles */
+  --p-select-clear-icon-color: #94a3b8;
+  --p-select-checkmark-color: #10b981;
+  --p-select-checkmark-gutter-start: 0.5rem;
+  --p-select-checkmark-gutter-end: 0.5rem;
+
+  /* Empty State */
+  --p-select-empty-message-padding: 0.625rem 1rem;
+}
+
+/* Optional: Hover effect for clear icon */
+.p-select-clear-icon:hover {
+  color: #f1f5f9;
+}
+
+/* Optional: Enhanced focus state */
+.p-select:focus-within {
+  border-color: var(--p-select-focus-border-color);
+  box-shadow: var(--p-select-focus-ring-shadow);
+}
+
+/* Optional: Smooth dropdown icon rotation on open */
+.p-select-dropdown {
+  transition: transform var(--p-select-transition-duration) ease;
+}
+
+.p-select.p-open .p-select-dropdown {
+  transform: rotate(180deg);
+}

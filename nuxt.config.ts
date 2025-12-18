@@ -37,7 +37,7 @@ export default defineNuxtConfig({
   modules: ["@pinia/nuxt", "@primevue/nuxt-module", "@nuxtjs/tailwindcss"],
   primevue: {
     options: {
-      unstyled: true, // This prevents PrimeVue from injecting its default styles
+      // unstyled: true, // This prevents PrimeVue from injecting its default styles
     },
   },
 });

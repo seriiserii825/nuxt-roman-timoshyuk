@@ -4,6 +4,7 @@
 @use "primeicons/primeicons.css";
 @use "blocks/dialog";
 @use "blocks/tailwind";
+@use 'blocks/select';
 
 .router-link-exact-active {
   @apply text-white underline;
