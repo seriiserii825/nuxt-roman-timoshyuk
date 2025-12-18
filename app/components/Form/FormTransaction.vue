@@ -3,7 +3,14 @@ const form = ref({
   title: "",
   amount: 0,
   category_id: null as number | null,
+  type: "",
 });
+
+const select_options = ref([
+  { name: "Food", id: 1 },
+  { name: "Transport", id: 2 },
+  { name: "Shopping", id: 3 },
+]);
 
 function onFormSubmit() {
   console.log(form.value);
@@ -35,7 +42,7 @@ function onFormSubmit() {
         >
       </div>
       <div class="flex justify-between gap-4">
-        <div class="w-full flex flex-col gap-1">
+        <div class="flex w-1/2 flex-col gap-1">
           <label for="amount" class="label">Amount: </label>
           <InputNumber
             v-model="form.amount"
@@ -55,19 +62,16 @@ function onFormSubmit() {
             >{{ $form.amount.error?.message }}</Message
           >
         </div>
-        <div class="w-full flex flex-col gap-1">
+        <div class="flex w-1/2 flex-col gap-1">
           <label for="category" class="label">Category: </label>
-          <Dropdown
+          <Select
             v-model="form.category_id"
-            :options="[
-              { label: 'Food', value: 1 },
-              { label: 'Transport', value: 2 },
-              { label: 'Utilities', value: 3 },
-            ]"
-            optionLabel="label"
-            optionValue="value"
-            placeholder="Select a category"
             id="category"
+            name="category"
+            :options="select_options"
+            optionLabel="name"
+            placeholder="Select a Category"
+            fluid
           />
           <Message
             v-if="$form.category_id?.invalid"
@@ -76,6 +80,26 @@ function onFormSubmit() {
             variant="simple"
             >{{ $form.category_id.error?.message }}</Message
           >
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <div class="flex items-center gap-2">
+          <RadioButton
+            v-model="form.type"
+            inputId="ingredient1"
+            name="type"
+            value="Income"
+          />
+          <label for="ingredient1">Income</label>
+        </div>
+        <div class="flex items-center gap-2">
+          <RadioButton
+            v-model="form.type"
+            inputId="ingredient2"
+            name="type"
+            value="Expense"
+          />
+          <label for="ingredient2">Expense</label>
         </div>
       </div>
       <Button type="submit" severity="secondary" label="Submit" />

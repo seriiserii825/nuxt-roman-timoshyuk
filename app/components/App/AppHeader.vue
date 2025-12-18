@@ -16,7 +16,7 @@ function logout() {
 <template>
   <div class="flex items-center justify-between gap-4 px-8 py-4 bg-gray-800 text-white">
     <NuxtLink to="/"><i class="pi pi-bitcoin" style="font-size: 1.8rem"></i></NuxtLink>
-    <nav v-if="is_auth" class="flex items-center gap-6 ml-auto text-white/50">
+    <nav v-if="is_auth" class="flex items-center text-lg gap-6 ml-auto text-white/50">
       <NuxtLink to="/">Home</NuxtLink>
       <NuxtLink to="/categories">Categories</NuxtLink>
       <NuxtLink to="/transactions">Transactions</NuxtLink>
@@ -24,7 +24,6 @@ function logout() {
     <div v-if="is_auth">
       <Button
         @click="logout"
-        class="btn btn-danger"
         label="Logout"
         icon="pi pi-sign-out"
         severity="help" />
