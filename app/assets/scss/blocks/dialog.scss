@@ -1,12 +1,64 @@
-.dialog {
-  [data-pc-section="header"] {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
+:root {
+  /* Dialog Base Styles */
+  --p-dialog-background: #1e293b;
+  --p-dialog-border-color: #334155;
+  --p-dialog-color: #e2e8f0;
+  --p-dialog-border-radius: 0.75rem;
+  --p-dialog-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+
+  /* Dialog Header */
+  --p-dialog-header-padding: 1.5rem;
+  --p-dialog-header-gap: 0.75rem;
+  --p-dialog-title-font-size: 1.25rem;
+  --p-dialog-title-font-weight: 600;
+
+  /* Dialog Content */
+  --p-dialog-content-padding: 1.5rem;
+
+  /* Dialog Footer */
+  --p-dialog-footer-padding: 1.5rem;
+  --p-dialog-footer-gap: 0.75rem;
 }
-[data-p="modal"][data-pc-section="mask"] {
-  background: rgba(0, 0, 0, 0.8);
+
+/* Optional: Dialog overlay/mask styling */
+.p-dialog-mask {
+  background-color: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+/* Optional: Dialog header border */
+.p-dialog .p-dialog-header {
+  border-bottom: 1px solid #334155;
+}
+
+/* Optional: Dialog footer border */
+.p-dialog .p-dialog-footer {
+  border-top: 1px solid #334155;
+}
+
+/* Optional: Close button styling */
+.p-dialog .p-dialog-header-close {
+  color: #94a3b8;
+  transition: color 0.2s ease;
+}
+
+.p-dialog .p-dialog-header-close:hover {
+  color: #e2e8f0;
+  background-color: rgba(148, 163, 184, 0.1);
+}
+
+/* Optional: Dialog animation */
+.p-dialog-enter-active {
+  transition: all 0.2s ease-out;
+}
+
+.p-dialog-leave-active {
+  transition: all 0.15s ease-in;
+}
+
+.p-dialog-enter-from,
+.p-dialog-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
 }

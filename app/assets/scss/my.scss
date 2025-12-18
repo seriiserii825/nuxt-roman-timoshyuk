@@ -5,7 +5,5 @@
 @use "blocks/dialog";
 @use "blocks/tailwind";
 @use 'blocks/select';
+@use 'blocks/button';
 
-.router-link-exact-active {
-  @apply text-white underline;
-}

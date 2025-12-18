@@ -27,7 +27,6 @@ const visible = computed({
       :draggable="false"
       :header="title"
       :style="{ width: '25rem' }"
-      class="dialog z-10 rounded-xl bg-slate-900 p-9 text-white/90"
     >
       <slot />
     </Dialog>

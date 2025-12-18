@@ -1,0 +1,263 @@
+:root {
+  /* Base Button Styles */
+  --p-button-border-radius: 0.5rem;
+  --p-button-rounded-border-radius: 2rem;
+  --p-button-gap: 0.5rem;
+  --p-button-padding-x: 1rem;
+  --p-button-padding-y: 0.625rem;
+  --p-button-icon-only-width: 2.75rem;
+
+  /* Small Button Variant */
+  --p-button-sm-font-size: 0.875rem;
+  --p-button-sm-padding-x: 0.75rem;
+  --p-button-sm-padding-y: 0.5rem;
+  --p-button-sm-icon-only-width: 2.25rem;
+
+  /* Large Button Variant */
+  --p-button-lg-font-size: 1.125rem;
+  --p-button-lg-padding-x: 1.25rem;
+  --p-button-lg-padding-y: 0.75rem;
+  --p-button-lg-icon-only-width: 3.25rem;
+
+  /* Typography */
+  --p-button-label-font-weight: 500;
+
+  /* Effects */
+  --p-button-raised-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --p-button-focus-ring-width: 2px;
+  --p-button-focus-ring-style: solid;
+  --p-button-focus-ring-offset: 0px;
+  --p-button-badge-size: 1rem;
+  --p-button-transition-duration: 0.2s;
+
+  /* Primary Button (Blue) */
+  --p-button-primary-background: #3b82f6;
+  --p-button-primary-hover-background: #2563eb;
+  --p-button-primary-active-background: #1d4ed8;
+  --p-button-primary-border-color: #3b82f6;
+  --p-button-primary-hover-border-color: #2563eb;
+  --p-button-primary-active-border-color: #1d4ed8;
+  --p-button-primary-color: #ffffff;
+  --p-button-primary-hover-color: #ffffff;
+  --p-button-primary-active-color: #ffffff;
+  --p-button-primary-focus-ring-color: rgba(59, 130, 246, 0.3);
+  --p-button-primary-focus-ring-shadow: 0 0 0 var(--p-button-focus-ring-width)
+    var(--p-button-primary-focus-ring-color);
+
+  /* Secondary Button (Gray) */
+  --p-button-secondary-background: #475569;
+  --p-button-secondary-hover-background: #334155;
+  --p-button-secondary-active-background: #1e293b;
+  --p-button-secondary-border-color: #475569;
+  --p-button-secondary-hover-border-color: #334155;
+  --p-button-secondary-active-border-color: #1e293b;
+  --p-button-secondary-color: #f1f5f9;
+  --p-button-secondary-hover-color: #ffffff;
+  --p-button-secondary-active-color: #ffffff;
+  --p-button-secondary-focus-ring-color: rgba(71, 85, 105, 0.3);
+  --p-button-secondary-focus-ring-shadow: 0 0 0 var(--p-button-focus-ring-width)
+    var(--p-button-secondary-focus-ring-color);
+
+  /* Info Button (Cyan) */
+  --p-button-info-background: #06b6d4;
+  --p-button-info-hover-background: #0891b2;
+  --p-button-info-active-background: #0e7490;
+  --p-button-info-border-color: #06b6d4;
+  --p-button-info-hover-border-color: #0891b2;
+  --p-button-info-active-border-color: #0e7490;
+  --p-button-info-color: #ffffff;
+  --p-button-info-hover-color: #ffffff;
+  --p-button-info-active-color: #ffffff;
+  --p-button-info-focus-ring-color: rgba(6, 182, 212, 0.3);
+  --p-button-info-focus-ring-shadow: 0 0 0 var(--p-button-focus-ring-width)
+    var(--p-button-info-focus-ring-color);
+
+  /* Success Button (Green - matching your income) */
+  --p-button-success-background: #10b981;
+  --p-button-success-hover-background: #059669;
+  --p-button-success-active-background: #047857;
+  --p-button-success-border-color: #10b981;
+  --p-button-success-hover-border-color: #059669;
+  --p-button-success-active-border-color: #047857;
+  --p-button-success-color: #ffffff;
+  --p-button-success-hover-color: #ffffff;
+  --p-button-success-active-color: #ffffff;
+  --p-button-success-focus-ring-color: rgba(16, 185, 129, 0.3);
+  --p-button-success-focus-ring-shadow: 0 0 0 var(--p-button-focus-ring-width)
+    var(--p-button-success-focus-ring-color);
+
+  /* Warn Button (Amber) */
+  --p-button-warn-background: #f59e0b;
+  --p-button-warn-hover-background: #d97706;
+  --p-button-warn-active-background: #b45309;
+  --p-button-warn-border-color: #f59e0b;
+  --p-button-warn-hover-border-color: #d97706;
+  --p-button-warn-active-border-color: #b45309;
+  --p-button-warn-color: #ffffff;
+  --p-button-warn-hover-color: #ffffff;
+  --p-button-warn-active-color: #ffffff;
+  --p-button-warn-focus-ring-color: rgba(245, 158, 11, 0.3);
+  --p-button-warn-focus-ring-shadow: 0 0 0 var(--p-button-focus-ring-width)
+    var(--p-button-warn-focus-ring-color);
+
+  /* Help Button (Purple) */
+  --p-button-help-background: #8b5cf6;
+  --p-button-help-hover-background: #7c3aed;
+  --p-button-help-active-background: #6d28d9;
+  --p-button-help-border-color: #8b5cf6;
+  --p-button-help-hover-border-color: #7c3aed;
+  --p-button-help-active-border-color: #6d28d9;
+  --p-button-help-color: #ffffff;
+  --p-button-help-hover-color: #ffffff;
+  --p-button-help-active-color: #ffffff;
+  --p-button-help-focus-ring-color: rgba(139, 92, 246, 0.3);
+  --p-button-help-focus-ring-shadow: 0 0 0 var(--p-button-focus-ring-width)
+    var(--p-button-help-focus-ring-color);
+
+  /* Danger Button (Red - matching your expense) */
+  --p-button-danger-background: #ef4444;
+  --p-button-danger-hover-background: #dc2626;
+  --p-button-danger-active-background: #b91c1c;
+  --p-button-danger-border-color: #ef4444;
+  --p-button-danger-hover-border-color: #dc2626;
+  --p-button-danger-active-border-color: #b91c1c;
+  --p-button-danger-color: #ffffff;
+  --p-button-danger-hover-color: #ffffff;
+  --p-button-danger-active-color: #ffffff;
+  --p-button-danger-focus-ring-color: rgba(239, 68, 68, 0.3);
+  --p-button-danger-focus-ring-shadow: 0 0 0 var(--p-button-focus-ring-width)
+    var(--p-button-danger-focus-ring-color);
+
+  /* Contrast Button */
+  --p-button-contrast-background: #ffffff;
+  --p-button-contrast-hover-background: #f1f5f9;
+  --p-button-contrast-active-background: #e2e8f0;
+  --p-button-contrast-border-color: #ffffff;
+  --p-button-contrast-hover-border-color: #f1f5f9;
+  --p-button-contrast-active-border-color: #e2e8f0;
+  --p-button-contrast-color: #0f172a;
+  --p-button-contrast-hover-color: #0f172a;
+  --p-button-contrast-active-color: #0f172a;
+  --p-button-contrast-focus-ring-color: rgba(255, 255, 255, 0.3);
+  --p-button-contrast-focus-ring-shadow: 0 0 0 var(--p-button-focus-ring-width)
+    var(--p-button-contrast-focus-ring-color);
+
+  /* Outlined Primary */
+  --p-button-outlined-primary-hover-background: rgba(59, 130, 246, 0.1);
+  --p-button-outlined-primary-active-background: rgba(59, 130, 246, 0.2);
+  --p-button-outlined-primary-border-color: #3b82f6;
+  --p-button-outlined-primary-color: #3b82f6;
+
+  /* Outlined Secondary */
+  --p-button-outlined-secondary-hover-background: rgba(71, 85, 105, 0.1);
+  --p-button-outlined-secondary-active-background: rgba(71, 85, 105, 0.2);
+  --p-button-outlined-secondary-border-color: #475569;
+  --p-button-outlined-secondary-color: #94a3b8;
+
+  /* Outlined Success */
+  --p-button-outlined-success-hover-background: rgba(16, 185, 129, 0.1);
+  --p-button-outlined-success-active-background: rgba(16, 185, 129, 0.2);
+  --p-button-outlined-success-border-color: #10b981;
+  --p-button-outlined-success-color: #10b981;
+
+  /* Outlined Info */
+  --p-button-outlined-info-hover-background: rgba(6, 182, 212, 0.1);
+  --p-button-outlined-info-active-background: rgba(6, 182, 212, 0.2);
+  --p-button-outlined-info-border-color: #06b6d4;
+  --p-button-outlined-info-color: #06b6d4;
+
+  /* Outlined Warn */
+  --p-button-outlined-warn-hover-background: rgba(245, 158, 11, 0.1);
+  --p-button-outlined-warn-active-background: rgba(245, 158, 11, 0.2);
+  --p-button-outlined-warn-border-color: #f59e0b;
+  --p-button-outlined-warn-color: #f59e0b;
+
+  /* Outlined Help */
+  --p-button-outlined-help-hover-background: rgba(139, 92, 246, 0.1);
+  --p-button-outlined-help-active-background: rgba(139, 92, 246, 0.2);
+  --p-button-outlined-help-border-color: #8b5cf6;
+  --p-button-outlined-help-color: #8b5cf6;
+
+  /* Outlined Danger */
+  --p-button-outlined-danger-hover-background: rgba(239, 68, 68, 0.1);
+  --p-button-outlined-danger-active-background: rgba(239, 68, 68, 0.2);
+  --p-button-outlined-danger-border-color: #ef4444;
+  --p-button-outlined-danger-color: #ef4444;
+
+  /* Outlined Contrast */
+  --p-button-outlined-contrast-hover-background: rgba(255, 255, 255, 0.1);
+  --p-button-outlined-contrast-active-background: rgba(255, 255, 255, 0.2);
+  --p-button-outlined-contrast-border-color: #e2e8f0;
+  --p-button-outlined-contrast-color: #e2e8f0;
+
+  /* Outlined Plain */
+  --p-button-outlined-plain-hover-background: rgba(148, 163, 184, 0.1);
+  --p-button-outlined-plain-active-background: rgba(148, 163, 184, 0.2);
+  --p-button-outlined-plain-border-color: #64748b;
+  --p-button-outlined-plain-color: #94a3b8;
+
+  /* Text Primary */
+  --p-button-text-primary-hover-background: rgba(59, 130, 246, 0.1);
+  --p-button-text-primary-active-background: rgba(59, 130, 246, 0.2);
+  --p-button-text-primary-color: #3b82f6;
+
+  /* Text Secondary */
+  --p-button-text-secondary-hover-background: rgba(71, 85, 105, 0.1);
+  --p-button-text-secondary-active-background: rgba(71, 85, 105, 0.2);
+  --p-button-text-secondary-color: #94a3b8;
+
+  /* Text Success */
+  --p-button-text-success-hover-background: rgba(16, 185, 129, 0.1);
+  --p-button-text-success-active-background: rgba(16, 185, 129, 0.2);
+  --p-button-text-success-color: #10b981;
+
+  /* Text Info */
+  --p-button-text-info-hover-background: rgba(6, 182, 212, 0.1);
+  --p-button-text-info-active-background: rgba(6, 182, 212, 0.2);
+  --p-button-text-info-color: #06b6d4;
+
+  /* Text Warn */
+  --p-button-text-warn-hover-background: rgba(245, 158, 11, 0.1);
+  --p-button-text-warn-active-background: rgba(245, 158, 11, 0.2);
+  --p-button-text-warn-color: #f59e0b;
+
+  /* Text Help */
+  --p-button-text-help-hover-background: rgba(139, 92, 246, 0.1);
+  --p-button-text-help-active-background: rgba(139, 92, 246, 0.2);
+  --p-button-text-help-color: #8b5cf6;
+
+  /* Text Danger */
+  --p-button-text-danger-hover-background: rgba(239, 68, 68, 0.1);
+  --p-button-text-danger-active-background: rgba(239, 68, 68, 0.2);
+  --p-button-text-danger-color: #ef4444;
+
+  /* Text Contrast */
+  --p-button-text-contrast-hover-background: rgba(255, 255, 255, 0.1);
+  --p-button-text-contrast-active-background: rgba(255, 255, 255, 0.2);
+  --p-button-text-contrast-color: #f1f5f9;
+
+  /* Text Plain */
+  --p-button-text-plain-hover-background: rgba(148, 163, 184, 0.1);
+  --p-button-text-plain-active-background: rgba(148, 163, 184, 0.2);
+  --p-button-text-plain-color: #94a3b8;
+
+  /* Link Button */
+  --p-button-link-color: #3b82f6;
+  --p-button-link-hover-color: #2563eb;
+  --p-button-link-active-color: #1d4ed8;
+}
+
+/* Optional: Enhanced button transitions */
+.p-button {
+  transition: all var(--p-button-transition-duration) ease;
+}
+
+/* Optional: Smooth hover effect */
+.p-button:hover {
+  transform: translateY(-1px);
+}
+
+.p-button:active {
+  transform: translateY(0);
+}
