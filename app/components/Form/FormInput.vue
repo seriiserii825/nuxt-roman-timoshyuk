@@ -35,7 +35,7 @@ const value = computed({
 
 <template>
   <div>
-    <label v-if="label" :for="name" class="block text-sm font-medium text-white">
+    <label v-if="label" :for="name" class="label">
       {{ label }}
     </label>
     <input
