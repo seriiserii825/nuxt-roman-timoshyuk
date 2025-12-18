@@ -11,6 +11,8 @@ const create_category_form = ref({
   title: "",
 });
 
+const is_loading = ref(false);
+
 const selected_category_id = ref<number | null>(null);
 
 const is_creating_category = ref(true);
@@ -34,11 +36,16 @@ async function createCategory() {
 }
 
 async function getCategories() {
+  is_loading.value = true;
   try {
     const response = await categoryService.getAll();
     categories.value = response.data;
   } catch (error) {
     handleAxiosError(error);
+  } finally {
+    setTimeout(() => {
+      is_loading.value = false;
+    }, 800);
   }
 }
 
@@ -87,7 +94,8 @@ onMounted(() => {
 <template>
   <div class="mt-10 rounded-md bg-slate-800 p-4">
     <div class="mt-2 flex flex-wrap items-center gap-2">
-      <template v-if="categories && categories.length > 0">
+      <Preloader v-if="is_loading" />
+      <template v-else-if="categories && categories.length > 0">
         <div
           v-for="category in categories"
           :key="category.id"
