@@ -26,17 +26,17 @@ function logout() {
       <NuxtLink to="/transactions">Transactions</NuxtLink>
     </nav>
     <div v-if="is_auth">
-      <button @click="logout" class="btn btn-danger">
+      <Btn @click="logout" variant="btn-danger">
         <font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" />
         Logout
-      </button>
+      </Btn>
     </div>
     <div v-else>
       <NuxtLink to="/auth?login=true">
-        <button class="btn" severity="help">Login</button>
+        <Btn>Login</Btn>
       </NuxtLink>
       <NuxtLink to="/auth?login=false">
-        <button class="btn btn-info ml-2">Register</button>
+        <Btn variant="btn-info">Register</Btn>
       </NuxtLink>
     </div>
   </div>

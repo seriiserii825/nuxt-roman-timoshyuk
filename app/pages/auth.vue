@@ -49,36 +49,37 @@ const onLogin = async () => {
 
     <div class="flex w-full flex-col gap-4 sm:w-96">
       <div class="flex flex-col gap-1">
-        <input
-          v-model="form.email"
-          class="input"
+        <FormInput
           name="custom_email"
           type="email"
           placeholder="Email"
+          v-model="form.email"
         />
       </div>
 
       <div class="flex flex-col gap-1">
-        <input
-          class="input"
+        <FormInput
           name="custom_password"
-          type="text"
+          type="password"
           placeholder="Password"
           v-model="form.password"
         />
       </div>
 
-      <button
+      <Btn
         v-if="!is_login"
         type="submit"
-        class="btn btn-info"
-        @click="onRegister"
+        variant="btn-info"
+        @emit_click="onRegister"
+        >Register</Btn
       >
-        Submit
-      </button>
-      <button v-else type="submit" class="btn btn-info" @click="onLogin">
-        Submit
-      </button>
+      <Btn
+        v-else-if="is_login"
+        type="submit"
+        @emit_click="onLogin"
+      >
+        Login
+      </Btn>
       <div class="mt-4 text-center">
         <a
           href="#"
@@ -94,9 +95,7 @@ const onLogin = async () => {
       </div>
       <div class="mt-4 text-center">
         <NuxtLink to="/">
-          <button class="btn btn-success">
-            Back to home
-          </button>
+          <button class="btn btn-success">Back to home</button>
         </NuxtLink>
       </div>
     </div>

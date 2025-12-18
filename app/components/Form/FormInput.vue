@@ -2,7 +2,7 @@
 const props = defineProps({
   label: {
     type: String,
-    required: true,
+    required: false,
   },
   name: {
     type: String,
@@ -35,7 +35,7 @@ const value = computed({
 
 <template>
   <div>
-    <label :for="name" class="block text-sm font-medium text-white">
+    <label v-if="label" :for="name" class="block text-sm font-medium text-white">
       {{ label }}
     </label>
     <input
