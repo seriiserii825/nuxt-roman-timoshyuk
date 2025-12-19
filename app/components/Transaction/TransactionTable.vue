@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from "vue";
+import formatCurrency from "~/helpers/formatCurrency";
 import formatDate from "~/helpers/formatDate";
 import type { ITransaction } from "~/interfaces/ITransaction";
 
@@ -40,7 +41,8 @@ const props = defineProps({
               'text-red-600': transaction.type === 'expense',
             }"
           >
-            {{ transaction.amount }}
+          {{ transaction.type === 'expense' ? '-' : '+' }}
+          {{ formatCurrency(transaction.amount) }}
           </td>
           <td class="px-6 py-4">{{ transaction.category.title }}</td>
           <td class="group relative cursor-pointer px-6 py-4">

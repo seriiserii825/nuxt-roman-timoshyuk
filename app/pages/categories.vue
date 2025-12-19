@@ -70,9 +70,13 @@ const deleteCategory = async (id: number) => {
     "Cancel",
   );
   if (!result.isConfirmed) return;
-  await categoryService.delete(id);
-  await getCategories();
-  useSweetAlert("success", "Category deleted");
+  try {
+    await categoryService.delete(id);
+    await getCategories();
+    useSweetAlert("success", "Category deleted");
+  } catch (error) {
+    handleAxiosError(error);
+  }
 };
 onMounted(() => {
   getCategories();
