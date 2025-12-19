@@ -111,17 +111,16 @@ onMounted(() => {
       <font-awesome-icon icon="fa-solid fa-plus" />
       {{ is_creating_category ? "Create new category" : "Update category" }}
     </div>
-    <CustomModal
+    <Popup
       title="Create category"
-      v-model:is_visible="is_visible_category_popup"
+      v-if="is_visible_category_popup"
+      @emit_close="is_visible_category_popup = false"
     >
-      <div class="mb-4 flex items-center gap-4">
-        <input
-          id="category"
+      <div class="mb-4">
+        <FormInput
+          name="category_title"
           v-model="create_category_form.title"
           placeholder="Category title"
-          class="flex-auto"
-          autocomplete="off"
         />
       </div>
       <Btn
@@ -130,6 +129,6 @@ onMounted(() => {
       >
         Submit
       </Btn>
-    </CustomModal>
+    </Popup>
   </div>
 </template>
