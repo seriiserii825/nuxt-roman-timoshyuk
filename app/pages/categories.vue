@@ -109,13 +109,10 @@ onMounted(() => {
         </div>
       </template>
     </div>
-    <div
-      @click="is_visible_category_popup = true"
-      class="mb-4 mt-4 flex cursor-pointer items-center gap-1 text-white/50 transition-colors hover:text-white"
-    >
-      <font-awesome-icon icon="fa-solid fa-plus" />
-      {{ is_creating_category ? "Create new category" : "Update category" }}
-    </div>
+    <TogglePopup
+      label="Create new category"
+      @emit_click="is_visible_category_popup = true"
+    />
     <Popup
       title="Create category"
       v-if="is_visible_category_popup"
