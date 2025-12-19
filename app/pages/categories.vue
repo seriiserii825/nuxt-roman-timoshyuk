@@ -14,11 +14,13 @@ const selected_category_id = ref<number | null>(null);
 const is_creating_category = ref(true);
 const categories = ref<ICategoriesResponse[]>([]);
 const is_visible_category_popup = ref(false);
+
 async function createCategory() {
   try {
-    await categoryService.create({
+    const category = await categoryService.create({
       title: create_category_form.value.title,
     });
+    last_changed_category_id.value = category.data.id;
     is_visible_category_popup.value = false;
     useSweetAlert("success", "Category created successfully");
     create_category_form.value.title = "";
@@ -26,6 +28,11 @@ async function createCategory() {
   } catch (error) {
     handleAxiosError(error);
   }
+}
+function toggleCreateCategoryPopup() {
+  is_creating_category.value = true;
+  create_category_form.value.title = "";
+  is_visible_category_popup.value = true;
 }
 async function getCategories() {
   is_loading.value = true;
@@ -78,6 +85,12 @@ const deleteCategory = async (id: number) => {
     handleAxiosError(error);
   }
 };
+
+function emitCloseCategoryPopup() {
+  is_visible_category_popup.value = false;
+  create_category_form.value.title = "";
+}
+
 onMounted(() => {
   getCategories();
 });
@@ -115,15 +128,16 @@ onMounted(() => {
     </div>
     <TogglePopup
       label="Create new category"
-      @emit_click="is_visible_category_popup = true"
+      @emit_click="toggleCreateCategoryPopup"
     />
     <Popup
-      title="Create category"
+      title="Update category"
       v-if="is_visible_category_popup"
-      @emit_close="is_visible_category_popup = false"
+      @emit_close="emitCloseCategoryPopup"
     >
       <div class="mb-4">
         <FormInput
+          :focus="is_visible_category_popup"
           name="category_title"
           v-model="create_category_form.title"
           placeholder="Category title"
@@ -133,7 +147,7 @@ onMounted(() => {
         :disabled="create_category_form.title.length === 0"
         @emit_click="is_creating_category ? createCategory() : updateCategory()"
       >
-        Submit
+        Update
       </Btn>
     </Popup>
   </div>

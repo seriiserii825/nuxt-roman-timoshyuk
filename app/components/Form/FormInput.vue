@@ -23,13 +23,26 @@ const props = defineProps({
     required: false,
     default: "",
   },
+  focus: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 const emit = defineEmits(["update:modelValue"]);
 
+const categoryInputRef = ref<HTMLInputElement | null>(null);
+
 const value = computed({
   get: () => props.modelValue,
   set: (val) => emit("update:modelValue", val),
+});
+
+onMounted(() => {
+  if (props.focus && categoryInputRef.value) {
+    categoryInputRef.value.focus();
+  }
 });
 </script>
 
@@ -39,11 +52,12 @@ const value = computed({
       {{ label }}
     </label>
     <input
+      ref="categoryInputRef"
       :name="name"
       :id="name"
       :type="type"
       v-model="value"
-      class="mt-1 block w-full rounded-md bg-transparent border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+      class="mt-1 block w-full rounded-md border-gray-300 bg-transparent shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
       :placeholder="placeholder"
     />
   </div>
