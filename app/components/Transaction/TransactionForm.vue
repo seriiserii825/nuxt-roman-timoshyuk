@@ -74,7 +74,6 @@ onMounted(() => {
 
 <template>
   <div class="shape">
-    <h2 class="mb-4 text-lg font-semibold">Add New Transaction</h2>
     <div class="mb-8 grid grid-cols-2 gap-3">
       <FormInput
         label="Title"

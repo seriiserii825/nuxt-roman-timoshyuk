@@ -12,6 +12,8 @@ const transaction_is_loading = ref(false);
 
 const transactions = ref<ITransaction[]>([]);
 
+const is_transaction_popup_visible = ref(false);
+
 async function getTransactions() {
   try {
     transaction_is_loading.value = true;
@@ -38,10 +40,18 @@ onMounted(() => {
 
 <template>
   <div>
-    <div class="mt-4 grid grid-cols-3 items-start gap-4">
-      <div class="col-span-2 grid">
+    <div class="mt-4 flex justify-between gap-4 mb-4">
+      <TogglePopup
+        label="Add Transaction"
+        @emit_click="is_transaction_popup_visible = true"
+      />
+      <Popup
+        v-if="is_transaction_popup_visible"
+        title="Add Transaction"
+        @emit_close="is_transaction_popup_visible = false"
+      >
         <TransactionForm class="mb-4" @emit_transaction="emitTransactions" />
-      </div>
+      </Popup>
       <div class="shape">
         <div class="grid grid-cols-2 gap-3">
           <div>
