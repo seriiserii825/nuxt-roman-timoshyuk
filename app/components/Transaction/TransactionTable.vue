@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from "vue";
+import formatDate from "~/helpers/formatDate";
 import type { ITransaction } from "~/interfaces/ITransaction";
 
 const props = defineProps({
@@ -14,12 +15,11 @@ const props = defineProps({
   <div class="shape">
     <table class="table w-full">
       <thead>
-        <tr class=" border-b border-slate-700">
+        <tr class="border-b border-slate-700">
           <th class="px-6 py-3 text-left text-sm font-semibold">N</th>
           <th class="px-6 py-3 text-left text-sm font-semibold">Title</th>
           <th class="px-6 py-3 text-left text-sm font-semibold">Amount $</th>
           <th class="px-6 py-3 text-left text-sm font-semibold">Category</th>
-          <th class="px-6 py-3 text-left text-sm font-semibold">User</th>
           <th class="px-6 py-3 text-left text-sm font-semibold">Date</th>
           <th class="px-6 py-3 text-left text-sm font-semibold">Action</th>
         </tr>
@@ -43,9 +43,12 @@ const props = defineProps({
             {{ transaction.amount }}
           </td>
           <td class="px-6 py-4">{{ transaction.category.title }}</td>
-          <td class="px-6 py-4">{{ transaction.user.email }}</td>
-          <td class="px-6 py-4">
-            {{ new Date(transaction.createdAt).toLocaleDateString() }}
+          <td class="group relative cursor-pointer px-6 py-4">
+            <span class="group-hover:hidden">{{ formatDate(transaction.createdAt, true) }}</span>
+            <span
+              class="hidden group-hover:block"
+              >{{ formatDate(transaction.createdAt) }}</span
+            >
           </td>
           <td class="px-6 py-4">
             <button class="text-red-600 hover:underline">Delete</button>
