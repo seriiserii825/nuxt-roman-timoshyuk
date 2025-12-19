@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { transactionService } from "~/api/services/transactionService";
+import TransactionForm from "~/components/Transaction/TransactionForm.vue";
 import useSweetAlert from "~/composable/useSweetAlert";
 import type { ITransaction } from "~/interfaces/ITransaction";
 
@@ -39,7 +40,7 @@ onMounted(() => {
   <div>
     <div class="mt-4 grid grid-cols-3 items-start gap-4">
       <div class="col-span-2 grid">
-        <FormTransaction class="mb-4" @emit_transaction="emitTransactions" />
+        <TransactionForm class="mb-4" @emit_transaction="emitTransactions" />
       </div>
       <div class="shape">
         <div class="grid grid-cols-2 gap-3">

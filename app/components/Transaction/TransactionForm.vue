@@ -5,7 +5,7 @@ import useSweetAlert from "~/composable/useSweetAlert";
 import type { ICategoriesResponse } from "~/interfaces/ICategoriesResponse";
 import type { ISelectOption } from "~/interfaces/ISelectOption";
 
-const emits = defineEmits(['emit_transaction'])
+const emits = defineEmits(["emit_transaction"]);
 
 const form = ref({
   title: "",
@@ -43,7 +43,7 @@ async function onSubmit() {
   try {
     await transactionService.create(form.value);
     useSweetAlert("success", "Transaction added successfully", "success");
-    emits('emit_transaction')
+    emits("emit_transaction");
     resetForm();
   } catch (error) {
     handleAxiosError(error);
@@ -93,24 +93,18 @@ onMounted(() => {
     </div>
     <div class="label">Type:</div>
     <div class="mb-8 flex items-center gap-2">
-      <label class="flex cursor-pointer items-center gap-2">
-        <input
-          type="radio"
-          value="income"
-          v-model="form.type"
-          class="form-radio text-blue-600"
-        />
-        <span>Income</span>
-      </label>
-      <label class="flex cursor-pointer items-center gap-2">
-        <input
-          type="radio"
-          value="expense"
-          v-model="form.type"
-          class="form-radio text-blue-600"
-        />
-        <span>Expense</span>
-      </label>
+      <FormRadio
+        name="transaction-type"
+        label="Income"
+        v-model="form.type"
+        value="income"
+      />
+      <FormRadio
+        name="transaction-type"
+        label="Expense"
+        v-model="form.type"
+        value="expense"
+      />
     </div>
     <Preloader v-if="categories_is_loading" />
     <FormSelect
