@@ -8,6 +8,7 @@ definePageMeta({
 const create_category_form = ref({
   title: "",
 });
+const last_changed_category_id = ref<number | null>(null);
 const is_loading = ref(false);
 const selected_category_id = ref<number | null>(null);
 const is_creating_category = ref(true);
@@ -41,6 +42,7 @@ async function getCategories() {
 }
 async function updateCategory() {
   if (selected_category_id.value === null) return;
+  last_changed_category_id.value = selected_category_id.value;
   try {
     await categoryService.update(selected_category_id.value, {
       title: create_category_form.value.title,
@@ -85,6 +87,9 @@ onMounted(() => {
           v-for="category in categories"
           :key="category.id"
           class="group relative flex cursor-pointer items-center gap-2 rounded-lg bg-blue-600 px-4 py-2"
+          :class="{
+            'bg-green-600': last_changed_category_id === category.id,
+          }"
         >
           <span>{{ category.title }}</span>
           <div
