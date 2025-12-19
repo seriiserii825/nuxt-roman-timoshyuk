@@ -6,14 +6,15 @@ export interface ITransaction {
   category: ICategory;
   createdAt: Date;
   updatedAt: Date;
+  user: IUser;
 }
 export type ICategory = {
   id: number;
   title: string;
-  user: IUser;
   createdAt: Date;
   updatedAt: Date;
 };
 export type IUser = {
   id: number;
+  email: string;
 };

@@ -19,6 +19,7 @@ const props = defineProps({
           <th class="px-6 py-3 text-left text-sm font-semibold">Title</th>
           <th class="px-6 py-3 text-left text-sm font-semibold">Amount $</th>
           <th class="px-6 py-3 text-left text-sm font-semibold">Category</th>
+          <th class="px-6 py-3 text-left text-sm font-semibold">User</th>
           <th class="px-6 py-3 text-left text-sm font-semibold">Date</th>
           <th class="px-6 py-3 text-left text-sm font-semibold">Action</th>
         </tr>
@@ -42,6 +43,7 @@ const props = defineProps({
             {{ transaction.amount }}
           </td>
           <td class="px-6 py-4">{{ transaction.category.title }}</td>
+          <td class="px-6 py-4">{{ transaction.user.email }}</td>
           <td class="px-6 py-4">
             {{ new Date(transaction.createdAt).toLocaleDateString() }}
           </td>

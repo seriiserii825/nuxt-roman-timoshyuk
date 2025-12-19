@@ -18,6 +18,7 @@ async function getTransactions() {
   try {
     transaction_is_loading.value = true;
     const response = await transactionService.getAll();
+    console.log("response", response);
     transactions.value = response.data;
   } catch (error) {
     handleAxiosError(error);
