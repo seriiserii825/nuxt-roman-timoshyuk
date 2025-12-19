@@ -14,7 +14,7 @@ const props = defineProps({
   <div class="shape">
     <table class="table w-full">
       <thead>
-        <tr>
+        <tr class=" border-b border-slate-700">
           <th class="px-6 py-3 text-left text-sm font-semibold">N</th>
           <th class="px-6 py-3 text-left text-sm font-semibold">Title</th>
           <th class="px-6 py-3 text-left text-sm font-semibold">Amount $</th>
@@ -25,7 +25,8 @@ const props = defineProps({
       </thead>
       <tbody>
         <tr
-          class="border-b border-b-slate-700 transition-colors hover:bg-gray-700"
+          class="border-b border-slate-700 transition-colors hover:bg-gray-700"
+          :class="{ 'bg-gray-800': index % 2 === 0 }"
           v-for="(transaction, index) in transactions"
           :key="transaction.id"
         >
