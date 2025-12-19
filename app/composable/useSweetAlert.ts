@@ -14,7 +14,7 @@ export default function useSweetAlert(
       title,
       text,
       showConfirmButton: false,
-      timer: 30000,
+      timer: 5000,
       timerProgressBar: true,
       theme: "dark",
     });

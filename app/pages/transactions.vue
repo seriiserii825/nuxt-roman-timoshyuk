@@ -32,6 +32,7 @@ async function getTransactions() {
 
 async function emitTransactions() {
   await getTransactions();
+  is_transaction_popup_visible.value = false;
 }
 
 async function deleteTransaction(id: number) {
