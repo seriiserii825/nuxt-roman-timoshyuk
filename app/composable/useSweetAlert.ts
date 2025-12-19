@@ -14,8 +14,9 @@ export default function useSweetAlert(
       title,
       text,
       showConfirmButton: false,
-      timer: 3000,
+      timer: 30000,
       timerProgressBar: true,
+      theme: "dark",
     });
   } else {
     // Fallback for when plugin isn't loaded yet

@@ -20,15 +20,7 @@ const visible = computed({
 </script>
 
 <template>
-  <div class="custom-modal">
-    <Dialog
-      v-model:visible="visible"
-      modal
-      :draggable="false"
-      :header="title"
-      :style="{ width: '25rem' }"
-    >
-      <slot />
-    </Dialog>
+  <div v-if="is_visible" class="custom-modal">
+    <slot />
   </div>
 </template>

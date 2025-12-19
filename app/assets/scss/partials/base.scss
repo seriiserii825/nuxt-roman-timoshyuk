@@ -3,7 +3,6 @@ body {
   margin: 0;
   font-family: var(--font-1);
 }
-
 .router-link-exact-active {
   @apply text-white underline;
 }

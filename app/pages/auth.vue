@@ -40,49 +40,62 @@ const onLogin = async () => {
 </script>
 
 <template>
-  <div class="mt-40 mx-auto max-w-md w-full flex flex-col justify-center items-center py-6">
-    <h1 class="text-3xl font-bold mb-6">
+  <div
+    class="mx-auto mt-40 flex w-full max-w-md flex-col items-center justify-center py-6"
+  >
+    <h1 class="mb-6 text-3xl font-bold">
       {{ is_login ? "Login" : "Register" }}
     </h1>
 
-    <div class="flex flex-col gap-4 w-full sm:w-96">
+    <div class="flex w-full flex-col gap-4 sm:w-96">
       <div class="flex flex-col gap-1">
-        <InputText
-          v-model="form.email"
-          class="input"
+        <FormInput
           name="custom_email"
           type="email"
-          placeholder="Email" />
+          placeholder="Email"
+          v-model="form.email"
+        />
       </div>
 
       <div class="flex flex-col gap-1">
-        <InputText
-          class="input"
+        <FormInput
           name="custom_password"
-          type="text"
+          type="password"
           placeholder="Password"
-          v-model="form.password" />
+          v-model="form.password"
+        />
       </div>
 
-      <Button
+      <Btn
         v-if="!is_login"
         type="submit"
-        class="btn btn-info"
-        label="Submit"
-        @click="onRegister" />
-      <Button v-else type="submit" class="btn btn-info" label="Submit" @click="onLogin" />
+        variant="btn-info"
+        @emit_click="onRegister"
+        >Register</Btn
+      >
+      <Btn
+        v-else-if="is_login"
+        type="submit"
+        @emit_click="onLogin"
+      >
+        Login
+      </Btn>
       <div class="mt-4 text-center">
-        <a href="#" class="text-blue-500 hover:underline" @click.prevent="is_login = !is_login">
-          {{ is_login ? "Don't have an account? Register" : "Already have an account? Login" }}
+        <a
+          href="#"
+          class="text-blue-500 hover:underline"
+          @click.prevent="is_login = !is_login"
+        >
+          {{
+            is_login
+              ? "Don't have an account? Register"
+              : "Already have an account? Login"
+          }}
         </a>
       </div>
       <div class="mt-4 text-center">
         <NuxtLink to="/">
-          <Button
-            class="btn btn-success"
-            label="Back to Home"
-            icon="pi pi-home"
-            severity="secondary" />
+          <button class="btn btn-success">Back to home</button>
         </NuxtLink>
       </div>
     </div>

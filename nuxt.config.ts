@@ -11,7 +11,10 @@ export default defineNuxtConfig({
 
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  css: ["~/assets/scss/my.scss"],
+  css: [
+    "~/assets/scss/my.scss",
+    "@fortawesome/fontawesome-svg-core/styles.css",
+  ],
   ssr: false,
 
   app: {
@@ -34,10 +37,5 @@ export default defineNuxtConfig({
     typedPages: true,
   },
 
-  modules: ["@pinia/nuxt", "@primevue/nuxt-module", "@nuxtjs/tailwindcss"],
-  primevue: {
-    options: {
-      // unstyled: true, // This prevents PrimeVue from injecting its default styles
-    },
-  },
+  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
 });
