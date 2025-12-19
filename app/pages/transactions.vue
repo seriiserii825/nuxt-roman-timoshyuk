@@ -34,6 +34,21 @@ async function emitTransactions() {
   await getTransactions();
 }
 
+async function deleteTransaction(id: number) {
+  try {
+    const confirm = await useSweetConfirm(
+      "Are you sure?",
+      "You won't be able to revert this!"
+    );
+    if (!confirm) return;
+    await transactionService.delete(id);
+    useSweetAlert("success", "Transaction deleted successfully");
+    await getTransactions();
+  } catch (error) {
+    handleAxiosError(error);
+  }
+}
+
 onMounted(() => {
   getTransactions();
 });
@@ -41,7 +56,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <div class="mt-4 flex justify-between gap-4 mb-4">
+    <div class="mb-4 mt-4 flex justify-between gap-4">
       <TogglePopup
         label="Add Transaction"
         @emit_click="is_transaction_popup_visible = true"
@@ -73,6 +88,10 @@ onMounted(() => {
       </div>
     </div>
     <Preloader v-if="transaction_is_loading" />
-    <TransactionTable :transactions="transactions" v-else-if="transactions" />
+    <TransactionTable
+      :transactions="transactions"
+      v-else-if="transactions"
+      @emit_delete="deleteTransaction"
+    />
   </div>
 </template>
