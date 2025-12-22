@@ -9,6 +9,10 @@ export const transactionService = {
     const { $axios } = useNuxtApp();
     return $axios.get(`/transactions/pagination?page=${page}&limit=${limit}`);
   },
+  getSummary: async () => {
+    const { $axios } = useNuxtApp();
+    return $axios.get("/transactions/summary");
+  },
   create: async (payload: ITransactionPayload) => {
     const { $axios } = useNuxtApp();
     return $axios.post("/transactions", payload);

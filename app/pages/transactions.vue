@@ -60,6 +60,10 @@ async function deleteTransaction(id: number) {
   }
 }
 
+async function getSummary(){
+
+}
+
 function emitPagination(new_page: number) {
   page.value = new_page;
   getTransactions();
