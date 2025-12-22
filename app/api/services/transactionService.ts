@@ -1,9 +1,13 @@
-import type {ITransactionPayload} from "~/interfaces/ITransactionPayload";
+import type { ITransactionPayload } from "~/interfaces/ITransactionPayload";
 
 export const transactionService = {
   getAll: async () => {
     const { $axios } = useNuxtApp();
     return $axios.get("/transactions");
+  },
+  getAllWithPagination: async (page: number, limit: number) => {
+    const { $axios } = useNuxtApp();
+    return $axios.get(`/transactions/pagination?page=${page}&limit=${limit}`);
   },
   create: async (payload: ITransactionPayload) => {
     const { $axios } = useNuxtApp();
@@ -16,5 +20,5 @@ export const transactionService = {
   delete: async (id: number) => {
     const { $axios } = useNuxtApp();
     return $axios.delete(`/transactions/${id}`);
-  }
+  },
 };

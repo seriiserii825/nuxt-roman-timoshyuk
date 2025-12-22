@@ -3,10 +3,15 @@ import { transactionService } from "~/api/services/transactionService";
 import TransactionForm from "~/components/Transaction/TransactionForm.vue";
 import useSweetAlert from "~/composable/useSweetAlert";
 import type { ITransaction } from "~/interfaces/ITransaction";
+import type {ITransactionWithPagination} from "~/interfaces/ITransactionWithPagination.ts";
 
 definePageMeta({
   middleware: "auth",
 });
+
+const page = ref(1);
+const limit = ref(2);
+const total_pages = ref(0);
 
 const transaction_is_loading = ref(false);
 
@@ -17,9 +22,14 @@ const is_transaction_popup_visible = ref(false);
 async function getTransactions() {
   try {
     transaction_is_loading.value = true;
-    const response = await transactionService.getAll();
-    console.log("response", response);
-    transactions.value = response.data;
+    const response = await transactionService.getAllWithPagination(
+      page.value,
+      limit.value,
+    );
+    const data: ITransactionWithPagination = response.data;
+    transactions.value = data.data;
+    page.value = data.meta.page;
+    total_pages.value = data.meta.totalPages;
   } catch (error) {
     handleAxiosError(error);
     useSweetAlert("error", "Failed to fetch transactions");
@@ -39,7 +49,7 @@ async function deleteTransaction(id: number) {
   try {
     const confirm = await useSweetConfirm(
       "Are you sure?",
-      "You won't be able to revert this!"
+      "You won't be able to revert this!",
     );
     if (!confirm) return;
     await transactionService.delete(id);
@@ -48,6 +58,11 @@ async function deleteTransaction(id: number) {
   } catch (error) {
     handleAxiosError(error);
   }
+}
+
+function emitPagination(new_page: number) {
+  page.value = new_page;
+  getTransactions();
 }
 
 onMounted(() => {
@@ -93,6 +108,13 @@ onMounted(() => {
       :transactions="transactions"
       v-else-if="transactions"
       @emit_delete="deleteTransaction"
+    />
+    <Pagination
+      v-if="transactions && transactions.length > 0"
+      :current_page="page"
+      :total_pages="total_pages"
+      :window="2"
+      @emit_update_current="emitPagination"
     />
   </div>
 </template>
