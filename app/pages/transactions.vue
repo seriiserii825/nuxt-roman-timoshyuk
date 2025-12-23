@@ -2,8 +2,9 @@
 import { transactionService } from "~/api/services/transactionService";
 import TransactionForm from "~/components/Transaction/TransactionForm.vue";
 import useSweetAlert from "~/composable/useSweetAlert";
+import type { ISummary } from "~/interfaces/ISummary";
 import type { ITransaction } from "~/interfaces/ITransaction";
-import type {ITransactionWithPagination} from "~/interfaces/ITransactionWithPagination.ts";
+import type { ITransactionWithPagination } from "~/interfaces/ITransactionWithPagination.ts";
 
 definePageMeta({
   middleware: "auth",
@@ -14,29 +15,31 @@ const limit = ref(2);
 const total_pages = ref(0);
 
 const transaction_is_loading = ref(false);
-
 const transactions = ref<ITransaction[]>([]);
-
 const is_transaction_popup_visible = ref(false);
+const summary = ref<ISummary>({
+  income: 0,
+  expense: 0,
+});
 
 async function getTransactions() {
   try {
     transaction_is_loading.value = true;
-    const response = await transactionService.getAllWithPagination(
-      page.value,
-      limit.value,
-    );
-    const data: ITransactionWithPagination = response.data;
+
+    const [transactionsRes] = await Promise.all([
+      transactionService.getAllWithPagination(page.value, limit.value),
+      getSummary(), // не блокирует первый
+    ]);
+
+    const data: ITransactionWithPagination = transactionsRes.data;
     transactions.value = data.data;
     page.value = data.meta.page;
     total_pages.value = data.meta.totalPages;
   } catch (error) {
     handleAxiosError(error);
-    useSweetAlert("error", "Failed to fetch transactions");
+    useSweetAlert("error", "Failed to fetch data");
   } finally {
-    setTimeout(() => {
-      transaction_is_loading.value = false;
-    }, 1000);
+    transaction_is_loading.value = false;
   }
 }
 
@@ -60,8 +63,13 @@ async function deleteTransaction(id: number) {
   }
 }
 
-async function getSummary(){
-
+async function getSummary() {
+  try {
+    const response = await transactionService.getSummary();
+    summary.value = response.data;
+  } catch (error) {
+    handleAxiosError(error);
+  }
 }
 
 function emitPagination(new_page: number) {
@@ -88,24 +96,7 @@ onMounted(() => {
       >
         <TransactionForm class="mb-4" @emit_transaction="emitTransactions" />
       </Popup>
-      <div class="shape">
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <p class="text-md text-center font-bold uppercase">Total Income:</p>
-            <p class="mt-2 rounded-sm bg-green-600 p-1 text-center font-bold">
-              1000$
-            </p>
-          </div>
-          <div>
-            <p class="text-md text-center font-bold uppercase">
-              Total Expense:
-            </p>
-            <p class="mt-2 rounded-sm bg-red-600 p-1 text-center font-bold">
-              1000$
-            </p>
-          </div>
-        </div>
-      </div>
+      <Summary :income="summary.income" :expense="summary.expense" />
     </div>
     <Preloader v-if="transaction_is_loading" />
     <TransactionTable

@@ -25,4 +25,8 @@ export const transactionService = {
     const { $axios } = useNuxtApp();
     return $axios.delete(`/transactions/${id}`);
   },
+  summary: async () => {
+    const { $axios } = useNuxtApp();
+    return $axios.get("/transactions/summary");
+  }
 };
