@@ -6,6 +6,10 @@ import type { ISummary } from "~/interfaces/ISummary";
 import type { ITransaction } from "~/interfaces/ITransaction";
 import type { ITransactionWithPagination } from "~/interfaces/ITransactionWithPagination.ts";
 
+import { DoughnutChart } from "vue-chart-3";
+import { Chart, registerables } from "chart.js";
+Chart.register(...registerables);
+
 definePageMeta({
   middleware: "auth",
 });
@@ -69,6 +73,11 @@ async function getSummary() {
   try {
     const response = await transactionService.getSummary();
     summary.value = response.data;
+    if (!chart.value.datasets[0]) return;
+    chart.value.datasets[0].data = [
+      summary.value.income,
+      summary.value.expense,
+    ];
   } catch (error) {
     handleAxiosError(error);
   }
@@ -79,6 +88,15 @@ function emitPagination(new_page: number) {
   getTransactions();
 }
 
+const chart = ref({
+  datasets: [
+    {
+      data: [30, 40],
+      backgroundColor: ["#77CEFF", "#0079AF"],
+    },
+  ],
+});
+
 onMounted(() => {
   getTransactions();
 });
@@ -86,7 +104,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <div class="mb-4 mt-4 flex justify-between gap-4">
+    <div class="mb-4 mt-4 flex items-start justify-between gap-4">
       <TogglePopup
         label="Add Transaction"
         @emit_click="is_transaction_popup_visible = true"
@@ -98,7 +116,14 @@ onMounted(() => {
       >
         <TransactionForm class="mb-4" @emit_transaction="emitTransactions" />
       </Popup>
-      <Summary :income="summary.income" :expense="summary.expense" />
+      <div>
+        <Summary
+          class="mb-4"
+          :income="summary.income"
+          :expense="summary.expense"
+        />
+        <DoughnutChart :chartData="chart" />
+      </div>
     </div>
     <Preloader v-if="transaction_is_loading" />
     <TransactionTable
