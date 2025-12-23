@@ -39,7 +39,9 @@ async function getTransactions() {
     handleAxiosError(error);
     useSweetAlert("error", "Failed to fetch data");
   } finally {
-    transaction_is_loading.value = false;
+    setTimeout(() => {
+      transaction_is_loading.value = false;
+    }, 500);
   }
 }
 
