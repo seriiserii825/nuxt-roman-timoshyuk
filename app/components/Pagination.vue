@@ -50,7 +50,7 @@ function buildPages(current, total, win = 1, edge = 2) {
 
 <template>
   <nav
-    class="flex flex-wrap items-center justify-center gap-2 mt-24 max-w-[900px] mx-auto"
+    class="flex flex-wrap items-center justify-center gap-2 max-w-[900px] mx-auto"
     role="navigation"
     aria-label="Pagination"
   >

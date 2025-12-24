@@ -17,9 +17,9 @@ export default {
   },
   theme: {
     screens: {
-      sm: { max: "480px" },
-      md: { max: "768px" },
       lg: { max: "992px" },
+      md: { max: "768px" },
+      sm: { max: "576px" },
     },
     container: {
       padding: "20px",

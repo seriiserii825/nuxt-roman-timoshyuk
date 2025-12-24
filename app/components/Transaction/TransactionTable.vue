@@ -19,8 +19,8 @@ const deleteTransaction = (id: number) => {
 </script>
 
 <template>
-  <div class="shape">
-    <table class="table w-full">
+  <div class="shape md:overflow-x-auto">
+    <table class="table w-full md:min-w-[700px]">
       <thead>
         <tr class="border-b border-slate-700">
           <th class="px-6 py-3 text-left text-sm font-semibold">N</th>

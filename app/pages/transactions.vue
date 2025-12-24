@@ -17,6 +17,7 @@ definePageMeta({
 const page = ref(1);
 const limit = ref(2);
 const total_pages = ref(0);
+const is_chart_visible = ref(false);
 
 const transaction_is_loading = ref(false);
 const transactions = ref<ITransaction[]>([]);
@@ -92,7 +93,7 @@ const chart = ref({
   datasets: [
     {
       data: [30, 40],
-      backgroundColor: ["#77CEFF", "#0079AF"],
+      backgroundColor: ["green", "red"],
     },
   ],
 });
@@ -103,26 +104,29 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <div class="mb-4 mt-4 flex items-start justify-between gap-4">
-      <TogglePopup
-        label="Add Transaction"
-        @emit_click="is_transaction_popup_visible = true"
-      />
-      <Popup
-        v-if="is_transaction_popup_visible"
-        title="Add Transaction"
-        @emit_close="is_transaction_popup_visible = false"
-      >
-        <TransactionForm class="mb-4" @emit_transaction="emitTransactions" />
-      </Popup>
+  <div class="pb-24">
+    <div class="mb-4 mt-4 flex items-start justify-between gap-4 md:block">
       <div>
+        <TogglePopup
+          label="Add Transaction"
+          @emit_click="is_transaction_popup_visible = true"
+        />
+        <Popup
+          v-if="is_transaction_popup_visible"
+          title="Add Transaction"
+          @emit_close="is_transaction_popup_visible = false"
+        >
+          <TransactionForm class="mb-4" @emit_transaction="emitTransactions" />
+        </Popup>
+      </div>
+      <div class="w-1/3 lg:w-1/2 md:w-full">
         <Summary
           class="mb-4"
           :income="summary.income"
           :expense="summary.expense"
+          @emit_view_report="is_chart_visible = !is_chart_visible"
         />
-        <DoughnutChart :chartData="chart" />
+        <DoughnutChart v-if="is_chart_visible" :chartData="chart" />
       </div>
     </div>
     <Preloader v-if="transaction_is_loading" />
@@ -130,6 +134,7 @@ onMounted(() => {
       :transactions="transactions"
       v-else-if="transactions"
       @emit_delete="deleteTransaction"
+      class="mb-8"
     />
     <Pagination
       v-if="transactions && transactions.length > 0"
