@@ -15,7 +15,7 @@ definePageMeta({
 });
 
 const page = ref(1);
-const limit = ref(2);
+const limit = ref(4);
 const total_pages = ref(0);
 const is_chart_visible = ref(false);
 
@@ -137,7 +137,7 @@ onMounted(() => {
       class="mb-8"
     />
     <Pagination
-      v-if="transactions && transactions.length > 0"
+      v-if="transactions && transactions.length > limit"
       :current_page="page"
       :total_pages="total_pages"
       :window="2"

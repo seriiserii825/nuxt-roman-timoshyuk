@@ -11,6 +11,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+const balance = computed(() => props.income - props.expense);
 </script>
 
 <template>
@@ -28,6 +30,10 @@ const props = defineProps({
           {{ income }}$
         </p>
       </div>
+    </div>
+    <div class="mb-4 text-center font-bold uppercase">
+      Ballance:
+      <span :class="{ 'text-red-700': balance <= 0 }">{{ balance }}$</span>
     </div>
     <div class="flex justify-center">
       <TogglePopup

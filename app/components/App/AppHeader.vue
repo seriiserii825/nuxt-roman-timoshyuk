@@ -16,14 +16,13 @@ function logout() {
 </script>
 
 <template>
-  <div class="flex items-center gap-4 bg-gray-800 px-8 py-4 text-white">
+  <div class="flex items-center gap-4 bg-gray-800 px-8 py-4 text-white sm:px-4">
     <NuxtLink to="/" class="mr-auto"
       ><font-awesome-icon icon="fa-solid fa-bitcoin-sign"
     /></NuxtLink>
     <nav
       v-if="is_auth"
       class="ml-auto flex items-center gap-6 text-white/50 sm:hidden"
-      :class="{ hidden: !is_menu_visible }"
     >
       <NuxtLink to="/">Home</NuxtLink>
       <NuxtLink to="/categories">Categories</NuxtLink>
