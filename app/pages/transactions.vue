@@ -138,8 +138,8 @@
     />
     <Pagination
       v-if="transactions && transactions.length > limit"
-      :current_page="page"
-      :total_pages="total_pages"
+      :current-page="page"
+      :total-pages="total_pages"
       :window="2"
       @emit_update_current="emitPagination"
     />
