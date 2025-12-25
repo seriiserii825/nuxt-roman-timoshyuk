@@ -1,17 +1,17 @@
-import { authService } from "~/api/services/authService";
-import { LocalStorage } from "~/helpers/LocalStorage";
+import { authService } from '~/api/services/authService'
 
 export default defineNuxtRouteMiddleware(async () => {
-  const authStore = useAuthStore();
+  const authStore = useAuthStore()
 
   // already authenticated
   if (authStore.email) {
-    return;
+    return
   }
 
   try {
-    await authService.getMe();
-  } catch (error) {
-    return navigateTo("/auth?login=true");
+    await authService.getMe()
+  } catch (error: unknown) {
+    console.error('Auth middleware error:', error)
+    return navigateTo('/auth?login=true')
   }
-});
+})

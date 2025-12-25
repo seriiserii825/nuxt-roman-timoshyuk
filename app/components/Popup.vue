@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const emits = defineEmits(["emit_close"]);
-const props = defineProps({
-  title: { type: String, required: false, default: "Popup" },
-  width: { type: String, required: false, default: "600px" },
-});
+  const emits = defineEmits(['emit_close'])
+  defineProps({
+    title: { type: String, required: false, default: 'Popup' },
+    width: { type: String, required: false, default: '600px' },
+  })
 </script>
 
 <template>
@@ -11,7 +11,7 @@ const props = defineProps({
     <div
       class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm transition"
       @click="emits('emit_close')"
-    />
+    ></div>
     <div
       :class="`relative z-10 w-[${width}] rounded-lg bg-slate-800 p-6 shadow-lg`"
     >
@@ -25,7 +25,7 @@ const props = defineProps({
           @click="$emit('emit_close')"
         />
       </header>
-      <slot />
+      <slot ></slot>
     </div>
   </div>
 </template>

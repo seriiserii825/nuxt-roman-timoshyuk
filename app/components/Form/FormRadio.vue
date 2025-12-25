@@ -23,7 +23,7 @@ const model = computed({
       :name="name"
       :value="value"
       class="form-radio text-blue-600"
-    >
+    />
     <span>{{ label }}</span>
   </label>
 </template>

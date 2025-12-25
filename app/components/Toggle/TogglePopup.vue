@@ -1,8 +1,8 @@
 <script setup lang="ts">
-const emits = defineEmits(["emit_click"]);
-const props = defineProps({
-  label: { type: String, required: false, default: "Label" },
-});
+  const emits = defineEmits(['emit_click'])
+  defineProps({
+    label: { type: String, required: false, default: 'Label' },
+  })
 </script>
 
 <template>

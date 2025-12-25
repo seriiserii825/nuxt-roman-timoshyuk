@@ -1,18 +1,24 @@
 <script setup lang="ts">
-import TogglePopup from "./Toggle/TogglePopup.vue";
+  import TogglePopup from './Toggle/TogglePopup.vue'
 
-const props = defineProps({
-  income: {
-    type: Number,
-    required: true,
-  },
-  expense: {
-    type: Number,
-    required: true,
-  },
-});
+  const emits = defineEmits(['emit_view_report'])
 
-const balance = computed(() => props.income - props.expense);
+  const props = defineProps({
+    income: {
+      type: Number,
+      required: true,
+    },
+    expense: {
+      type: Number,
+      required: true,
+    },
+  })
+
+  const balance = computed(() => props.income - props.expense)
+
+  function emitViewReport() {
+    emits('emit_view_report')
+  }
 </script>
 
 <template>
@@ -36,10 +42,7 @@ const balance = computed(() => props.income - props.expense);
       <span :class="{ 'text-red-700': balance <= 0 }">{{ balance }}$</span>
     </div>
     <div class="flex justify-center">
-      <TogglePopup
-        label="View Detailed Report"
-        @emit_click="$emit('emit_view_report')"
-      />
+      <TogglePopup label="View Detailed Report" @emit_click="emitViewReport" />
     </div>
   </div>
 </template>

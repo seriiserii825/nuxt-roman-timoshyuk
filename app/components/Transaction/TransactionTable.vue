@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import type { PropType } from "vue";
-import formatCurrency from "~/helpers/formatCurrency";
-import formatDate from "~/helpers/formatDate";
-import type { ITransaction } from "~/interfaces/ITransaction";
+  import type { PropType } from 'vue'
+  import formatCurrency from '~/helpers/formatCurrency'
+  import formatDate from '~/helpers/formatDate'
+  import type { ITransaction } from '~/interfaces/ITransaction'
 
-const emits = defineEmits(['emit_delete'])
+  const emits = defineEmits(['emit_delete'])
 
-const props = defineProps({
-  transactions: {
-    type: Array as PropType<ITransaction[]>,
-    required: true,
-  },
-});
+  defineProps({
+    transactions: {
+      type: Array as PropType<ITransaction[]>,
+      required: true,
+    },
+  })
 
-const deleteTransaction = (id: number) => {
-  emits('emit_delete', id);
-};
+  const deleteTransaction = (id: number) => {
+    emits('emit_delete', id)
+  }
 </script>
 
 <template>
@@ -47,7 +47,7 @@ const deleteTransaction = (id: number) => {
               'text-red-600': transaction.type === 'expense',
             }"
           >
-            {{ transaction.type === "expense" ? "-" : "+" }}
+            {{ transaction.type === 'expense' ? '-' : '+' }}
             {{ formatCurrency(transaction.amount) }}
           </td>
           <td class="px-6 py-4">{{ transaction.category.title }}</td>
@@ -60,7 +60,10 @@ const deleteTransaction = (id: number) => {
             }}</span>
           </td>
           <td class="px-6 py-4">
-            <button class="text-red-600 hover:text-red-800" @click="deleteTransaction(transaction.id)">
+            <button
+              class="text-red-600 hover:text-red-800"
+              @click="deleteTransaction(transaction.id)"
+            >
               <font-awesome-icon icon="fa-solid fa-trash-can" />
             </button>
           </td>

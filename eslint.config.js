@@ -24,5 +24,17 @@ export default withNuxt({
       },
     ],
     'vue/multi-word-component-names': 'off',
+    'vue/html-self-closing': [
+      'error',
+      {
+        html: {
+          void: 'always', // <input />, <br />, <img />
+          normal: 'never', // <div></div>
+          component: 'always', // <MyComponent />
+        },
+        svg: 'always',
+        math: 'always',
+      },
+    ],
   },
 })
