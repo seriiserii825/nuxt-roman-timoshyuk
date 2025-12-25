@@ -56,12 +56,12 @@ function buildPages(current, total, win = 1, edge = 2) {
   >
     <!-- Prev -->
     <button
-      @click="goPrev"
       :disabled="current_page === 1"
       class="w-10 h-10 flex items-center justify-center rounded-md
              border border-slate-700 bg-slate-800 text-slate-300
              hover:bg-slate-700 disabled:opacity-40 disabled:cursor-not-allowed"
       aria-label="Previous page"
+      @click="goPrev"
     >
       ‹
     </button>
@@ -80,7 +80,6 @@ function buildPages(current, total, win = 1, edge = 2) {
       <!-- Page -->
       <button
         v-else
-        @click="goTo(p)"
         :aria-current="p === current_page ? 'page' : undefined"
         class="w-10 h-10 rounded-md text-sm font-semibold transition
                border border-slate-700"
@@ -89,6 +88,7 @@ function buildPages(current, total, win = 1, edge = 2) {
             ? 'bg-slate-600 text-white'
             : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
         "
+        @click="goTo(p)"
       >
         {{ p }}
       </button>
@@ -96,12 +96,12 @@ function buildPages(current, total, win = 1, edge = 2) {
 
     <!-- Next -->
     <button
-      @click="goNext"
       :disabled="current_page === total_pages"
       class="w-10 h-10 flex items-center justify-center rounded-md
              border border-slate-700 bg-slate-800 text-slate-300
              hover:bg-slate-700 disabled:opacity-40 disabled:cursor-not-allowed"
       aria-label="Next page"
+      @click="goNext"
     >
       ›
     </button>

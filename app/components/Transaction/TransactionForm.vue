@@ -76,50 +76,50 @@ onMounted(() => {
   <div class="shape">
     <div class="mb-8 grid grid-cols-2 gap-3">
       <FormInput
+        v-model="form.title"
         label="Title"
         name="title"
         placeholder="Enter transaction title"
-        v-model="form.title"
       />
 
       <FormInput
+        v-model="form.amount"
         label="Amount"
         name="amount"
         type="number"
         placeholder="Enter amount"
-        v-model="form.amount"
       />
     </div>
     <div class="label">Type:</div>
     <div class="mb-8 flex items-center gap-2">
       <FormRadio
+        v-model="form.type"
         name="transaction-type"
         label="Income"
-        v-model="form.type"
         value="income"
       />
       <FormRadio
+        v-model="form.type"
         name="transaction-type"
         label="Expense"
-        v-model="form.type"
         value="expense"
       />
     </div>
     <Preloader v-if="categories_is_loading" />
     <FormSelect
       v-else-if="categories"
+      v-model="form.category"
       label="Manage Category"
       name="category"
       :options="categories"
-      v-model="form.category"
       class="mb-8"
     />
     <Btn
       type="submit"
       class="w-fit"
       variant="btn-success"
-      @emit_click="onSubmit"
       :disabled="!form_are_valid"
+      @emit_click="onSubmit"
       >Add Transaction</Btn
     >
   </div>

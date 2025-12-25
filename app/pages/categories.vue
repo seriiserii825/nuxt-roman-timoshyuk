@@ -113,14 +113,14 @@ onMounted(() => {
             class="pointer-events-none absolute inset-0 flex min-w-16 items-center justify-between gap-2 rounded-lg bg-black/90 px-3 opacity-0 transition-opacity duration-200 group-hover:pointer-events-auto group-hover:opacity-100"
           >
             <font-awesome-icon
-              @click="updateFunc(category.id)"
               :icon="['fas', 'pen-to-square']"
               class="inline-block cursor-pointer text-white transition-all hover:scale-110 hover:text-blue-400"
+              @click="updateFunc(category.id)"
             />
             <font-awesome-icon
-              @click="deleteCategory(category.id)"
               :icon="['fas', 'trash']"
               class="inline-block cursor-pointer text-white transition-all hover:scale-110 hover:text-red-600"
+              @click="deleteCategory(category.id)"
             />
           </div>
         </div>
@@ -131,15 +131,15 @@ onMounted(() => {
       @emit_click="toggleCreateCategoryPopup"
     />
     <Popup
-      title="Update category"
       v-if="is_visible_category_popup"
+      title="Update category"
       @emit_close="emitCloseCategoryPopup"
     >
       <div class="mb-4">
         <FormInput
+          v-model="create_category_form.title"
           :focus="is_visible_category_popup"
           name="category_title"
-          v-model="create_category_form.title"
           placeholder="Category title"
         />
       </div>

@@ -33,10 +33,10 @@ const deleteTransaction = (id: number) => {
       </thead>
       <tbody>
         <tr
-          class="border-b border-slate-700 transition-colors hover:bg-gray-700"
-          :class="{ 'bg-gray-800': index % 2 === 0 }"
           v-for="(transaction, index) in transactions"
           :key="transaction.id"
+          class="border-b border-slate-700 transition-colors hover:bg-gray-700"
+          :class="{ 'bg-gray-800': index % 2 === 0 }"
         >
           <td class="px-6 py-4">{{ index + 1 }}</td>
           <td class="px-6 py-4">{{ transaction.title }}</td>

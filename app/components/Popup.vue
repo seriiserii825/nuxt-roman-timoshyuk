@@ -11,7 +11,7 @@ const props = defineProps({
     <div
       class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm transition"
       @click="emits('emit_close')"
-    ></div>
+    />
     <div
       :class="`relative z-10 w-[${width}] rounded-lg bg-slate-800 p-6 shadow-lg`"
     >
@@ -20,9 +20,9 @@ const props = defineProps({
       >
         <h2 class="text-xl font-semibold">{{ title }}</h2>
         <font-awesome-icon
-          @click="$emit('emit_close')"
           class="trasition-color cursor-pointer text-slate-400 hover:text-white"
           icon="fa-solid fa-square-xmark"
+          @click="$emit('emit_close')"
         />
       </header>
       <slot />

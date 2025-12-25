@@ -39,9 +39,9 @@ const value = computed({
   <label class="grid">
     <span class="label">{{ label }}</span>
     <select
+      :id="name"
       v-model="value"
       :name="name"
-      :id="name"
       :required="required"
       class="cursor-pointer border-slate-700 bg-slate-800"
     >

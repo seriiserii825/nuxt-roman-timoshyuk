@@ -42,7 +42,7 @@ function logout() {
       >
     </nav>
     <div v-if="is_auth">
-      <Btn @click="logout" variant="btn-danger">
+      <Btn variant="btn-danger" @click="logout">
         <font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" />
         Logout
       </Btn>
@@ -59,7 +59,7 @@ function logout() {
       class="relative z-20 hidden sm:block"
       @click="is_menu_visible = !is_menu_visible"
     >
-      <font-awesome-icon icon="fa-solid fa-bars" v-if="is_auth" />
+      <font-awesome-icon v-if="is_auth" icon="fa-solid fa-bars" />
     </div>
   </div>
 </template>

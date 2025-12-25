@@ -18,12 +18,12 @@ const model = computed({
 <template>
   <label class="flex cursor-pointer items-center gap-2">
     <input
+      v-model="model"
       type="radio"
       :name="name"
       :value="value"
-      v-model="model"
       class="form-radio text-blue-600"
-    />
+    >
     <span>{{ label }}</span>
   </label>
 </template>

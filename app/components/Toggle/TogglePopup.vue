@@ -7,8 +7,8 @@ const props = defineProps({
 
 <template>
   <div
-    @click="emits('emit_click')"
     class="mb-4 mt-4 flex cursor-pointer items-center gap-1 text-white/50 transition-colors hover:text-white"
+    @click="emits('emit_click')"
   >
     <font-awesome-icon icon="fa-solid fa-plus" />
     <span>{{ label }}</span>

@@ -21,15 +21,15 @@ function onFormSubmit() {
   <div class="shape">
     <Form
       v-slot="$form"
-      @submit="onFormSubmit"
       class="flex flex-col justify-center gap-4"
+      @submit="onFormSubmit"
     >
       <div class="flex flex-col gap-1">
         <label for="title" class="label">Title: </label>
         <InputText
+          id="title"
           v-model="form.title"
           name="form_title"
-          id="title"
           type="text"
           placeholder="Title"
         />
@@ -45,9 +45,9 @@ function onFormSubmit() {
         <div class="flex w-1/2 flex-col gap-1">
           <label for="amount" class="label">Amount: </label>
           <InputNumber
+            id="amount"
             v-model="form.amount"
             name="form_amount"
-            id="amount"
             placeholder="Amount"
             fluid
             mode="currency"
@@ -65,11 +65,11 @@ function onFormSubmit() {
         <div class="flex w-1/2 flex-col gap-1">
           <label for="category" class="label">Category: </label>
           <Select
-            v-model="form.category_id"
             id="category"
+            v-model="form.category_id"
             name="category"
             :options="select_options"
-            optionLabel="name"
+            option-label="name"
             placeholder="Select a Category"
             fluid
           />
@@ -86,7 +86,7 @@ function onFormSubmit() {
         <div class="flex items-center gap-2">
           <RadioButton
             v-model="form.type"
-            inputId="ingredient1"
+            input-id="ingredient1"
             name="type"
             value="Income"
           />
@@ -95,7 +95,7 @@ function onFormSubmit() {
         <div class="flex items-center gap-2">
           <RadioButton
             v-model="form.type"
-            inputId="ingredient2"
+            input-id="ingredient2"
             name="type"
             value="Expense"
           />
