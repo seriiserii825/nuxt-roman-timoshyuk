@@ -9,7 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "start": "pm2 start ecosystem.config.cjs && pm2 save && pm2 startup",
-    "update": "git pull && bun install && bun run build && pm2 restart 2"
+    "update": "git pull && bun install && bun run build && pm2 restart nuxt-roman-timoshyuk"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
