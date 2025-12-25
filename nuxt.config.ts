@@ -9,20 +9,20 @@ export default defineNuxtConfig({
     port: Number(process.env.NUXT_PORT) || 3444,
   },
 
-  compatibilityDate: "2025-07-15",
+  compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   css: [
-    "~/assets/scss/my.scss",
-    "@fortawesome/fontawesome-svg-core/styles.css",
+    '~/assets/scss/my.scss',
+    '@fortawesome/fontawesome-svg-core/styles.css',
   ],
   ssr: false,
 
   app: {
     head: {
-      link: [{ rel: "stylesheet", href: "/css/fonts.css" }],
+      link: [{ rel: 'stylesheet', href: '/css/fonts.css' }],
     },
-    pageTransition: { name: "page", mode: "out-in" },
-    layoutTransition: { name: "layout", mode: "out-in" },
+    pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' },
   },
 
   typescript: {
@@ -30,12 +30,12 @@ export default defineNuxtConfig({
   },
 
   pinia: {
-    storesDirs: ["./stores/**"],
+    storesDirs: ['./stores/**'],
   },
 
   experimental: {
     typedPages: true,
   },
 
-  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
-});
+  modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', '@nuxt/eslint'],
+})

@@ -9,7 +9,9 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "start": "pm2 start ecosystem.config.cjs && pm2 save && pm2 startup",
-    "update": "git pull && bun install && bun run build && pm2 restart nuxt-roman-timoshyuk"
+    "update": "git pull && bun install && bun run build && pm2 restart nuxt-roman-timoshyuk",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
@@ -36,6 +38,9 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.10",
+    "@nuxt/eslint": "^1.12.1",
+    "eslint": "^9.39.2",
+    "eslint-plugin-vue": "^10.6.2",
     "prettier": "^3.7.4",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "^5.9.3",
