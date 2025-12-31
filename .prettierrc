@@ -17,6 +17,7 @@
     "^@/composables/(.*)$",
     "^@/utils/(.*)$",
     "^@/types/(.*)$",
+    "^@/types/(.*)$",
     "^@/stores/(.*)$",
     "^@/components/(.*)$",
     "^@/layouts/(.*)$",
