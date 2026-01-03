@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import useSweetAlert from "~/composable/useSweetAlert";
-import { LocalStorage } from "~/helpers/LocalStorage";
+  import useSweetAlert from '~/composable/useSweetAlert'
+  import { LocalStorage } from '~/helpers/LocalStorage'
 
-const is_auth = useIsLoggedIn();
-const auth_store = useAuthStore();
+  const is_auth = useIsLoggedIn()
+  const auth_store = useAuthStore()
 
-const is_menu_visible = ref(false);
+  const is_menu_visible = ref(false)
 
-function logout() {
-  auth_store.setEmail(null);
-  LocalStorage.removeItem("token");
-  useSweetAlert("success", "Logout successful!");
-  navigateTo("/auth?login=true");
-}
+  function logout() {
+    auth_store.setEmail(null)
+    LocalStorage.removeItem('token')
+    useSweetAlert('success', 'Logout successful!')
+    navigateTo('/auth?login=true')
+  }
 </script>
 
 <template>

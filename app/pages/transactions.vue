@@ -1,4 +1,7 @@
 <script setup lang="ts">
+  import { Chart, registerables } from 'chart.js'
+  import { DoughnutChart } from 'vue-chart-3'
+
   import { transactionService } from '~/api/services/transactionService'
   import TransactionForm from '~/components/Transaction/TransactionForm.vue'
   import useSweetAlert from '~/composable/useSweetAlert'
@@ -6,8 +9,6 @@
   import type { ITransaction } from '~/interfaces/ITransaction'
   import type { ITransactionWithPagination } from '~/interfaces/ITransactionWithPagination.ts'
 
-  import { DoughnutChart } from 'vue-chart-3'
-  import { Chart, registerables } from 'chart.js'
   Chart.register(...registerables)
 
   definePageMeta({
