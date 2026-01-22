@@ -12,5 +12,10 @@ export const useSummaryStore = defineStore('summary', () => {
   function setSummary(newSummary: ISummary) {
     summary.value = newSummary
   }
-  return { summary, setSummary }
+
+  const balance = computed(() => {
+    return summary.value.income - summary.value.expense
+  })
+
+  return { summary, setSummary, balance }
 })

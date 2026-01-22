@@ -1,7 +1,25 @@
 <script setup lang="ts">
+  import { transactionService } from '~/api/services/transactionService'
+
   definePageMeta({
     middleware: 'auth',
   })
+
+  const summary_store = useSummaryStore()
+  const { balance, summary } = storeToRefs(summary_store)
+
+  async function getSummary() {
+    try {
+      const response = await transactionService.getSummary()
+      summary_store.setSummary({
+        income: response.data.income,
+        expense: response.data.expense,
+      })
+    } catch (error) {
+      handleAxiosError(error)
+    }
+  }
+  getSummary()
 </script>
 
 <template>
@@ -15,281 +33,11 @@
     <!-- Stats Cards -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
       <!-- Total Balance Card -->
-      <div
-        class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl p-6 shadow-xl"
-      >
-        <div class="flex justify-between items-start mb-4">
-          <div>
-            <p class="text-blue-100 text-sm mb-1">Total Balance</p>
-            <h2 class="text-3xl font-bold text-white">-$3,011</h2>
-          </div>
-          <div class="bg-blue-500 bg-opacity-50 rounded-lg p-3">
-            <svg
-              class="w-6 h-6 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </div>
-        </div>
-        <div class="flex items-center text-blue-100 text-sm">
-          <span class="text-red-300">↓ 4.3%</span>
-          <span class="ml-2">from last month</span>
-        </div>
-      </div>
-
+      <TotalBalance v-if="balance" :balance="balance" />
       <!-- Total Income Card -->
-      <div
-        class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700"
-      >
-        <div class="flex justify-between items-start mb-4">
-          <div>
-            <p class="text-gray-400 text-sm mb-1">Total Income</p>
-            <h2 class="text-3xl font-bold text-green-400">$6,498</h2>
-          </div>
-          <div class="bg-green-500 bg-opacity-20 rounded-lg p-3">
-            <svg
-              class="w-6 h-6 text-green-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-              />
-            </svg>
-          </div>
-        </div>
-        <div class="flex items-center text-gray-400 text-sm">
-          <span class="text-green-400">↑ 12.5%</span>
-          <span class="ml-2">from last month</span>
-        </div>
-      </div>
-
+      <TotalIncome v-if="summary.income" :income="summary.income" />
       <!-- Total Expenses Card -->
-      <div
-        class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700"
-      >
-        <div class="flex justify-between items-start mb-4">
-          <div>
-            <p class="text-gray-400 text-sm mb-1">Total Expenses</p>
-            <h2 class="text-3xl font-bold text-red-400">$12,799</h2>
-          </div>
-          <div class="bg-red-500 bg-opacity-20 rounded-lg p-3">
-            <svg
-              class="w-6 h-6 text-red-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"
-              />
-            </svg>
-          </div>
-        </div>
-        <div class="flex items-center text-gray-400 text-sm">
-          <span class="text-red-400">↑ 8.2%</span>
-          <span class="ml-2">from last month</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Charts and Quick Actions -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
-      <!-- Spending Chart -->
-      <div
-        class="lg:col-span-2 bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700"
-      >
-        <div class="flex justify-between items-center mb-6">
-          <h3 class="text-xl font-semibold text-white">Spending Overview</h3>
-          <select
-            class="bg-slate-700 text-gray-300 rounded-lg px-3 py-1 text-sm border border-slate-600"
-          >
-            <option>Last 7 days</option>
-            <option>Last 30 days</option>
-            <option>Last 3 months</option>
-          </select>
-        </div>
-        <div class="h-64 flex items-end justify-around space-x-2">
-          <div class="flex flex-col items-center flex-1">
-            <div
-              class="w-full bg-gradient-to-t from-red-600 to-red-400 rounded-t-lg"
-              style="height: 65%"
-            ></div>
-            <span class="text-gray-400 text-xs mt-2">Mon</span>
-          </div>
-          <div class="flex flex-col items-center flex-1">
-            <div
-              class="w-full bg-gradient-to-t from-red-600 to-red-400 rounded-t-lg"
-              style="height: 45%"
-            ></div>
-            <span class="text-gray-400 text-xs mt-2">Tue</span>
-          </div>
-          <div class="flex flex-col items-center flex-1">
-            <div
-              class="w-full bg-gradient-to-t from-red-600 to-red-400 rounded-t-lg"
-              style="height: 80%"
-            ></div>
-            <span class="text-gray-400 text-xs mt-2">Wed</span>
-          </div>
-          <div class="flex flex-col items-center flex-1">
-            <div
-              class="w-full bg-gradient-to-t from-red-600 to-red-400 rounded-t-lg"
-              style="height: 55%"
-            ></div>
-            <span class="text-gray-400 text-xs mt-2">Thu</span>
-          </div>
-          <div class="flex flex-col items-center flex-1">
-            <div
-              class="w-full bg-gradient-to-t from-red-600 to-red-400 rounded-t-lg"
-              style="height: 90%"
-            ></div>
-            <span class="text-gray-400 text-xs mt-2">Fri</span>
-          </div>
-          <div class="flex flex-col items-center flex-1">
-            <div
-              class="w-full bg-gradient-to-t from-red-600 to-red-400 rounded-t-lg"
-              style="height: 35%"
-            ></div>
-            <span class="text-gray-400 text-xs mt-2">Sat</span>
-          </div>
-          <div class="flex flex-col items-center flex-1">
-            <div
-              class="w-full bg-gradient-to-t from-red-600 to-red-400 rounded-t-lg"
-              style="height: 50%"
-            ></div>
-            <span class="text-gray-400 text-xs mt-2">Sun</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Quick Actions -->
-      <div
-        class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700"
-      >
-        <h3 class="text-xl font-semibold text-white mb-6">Quick Actions</h3>
-        <div class="space-y-3">
-          <button
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg p-4 transition flex items-center justify-between"
-          >
-            <div class="flex items-center space-x-3">
-              <div class="bg-blue-500 rounded-lg p-2">
-                <svg
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 4v16m8-8H4"
-                  />
-                </svg>
-              </div>
-              <span class="font-medium">Add Transaction</span>
-            </div>
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
-          <button
-            class="w-full bg-slate-700 hover:bg-slate-600 text-white rounded-lg p-4 transition flex items-center justify-between"
-          >
-            <div class="flex items-center space-x-3">
-              <div class="bg-purple-500 bg-opacity-20 rounded-lg p-2">
-                <svg
-                  class="w-5 h-5 text-purple-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                  />
-                </svg>
-              </div>
-              <span class="font-medium">View Reports</span>
-            </div>
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
-          <button
-            class="w-full bg-slate-700 hover:bg-slate-600 text-white rounded-lg p-4 transition flex items-center justify-between"
-          >
-            <div class="flex items-center space-x-3">
-              <div class="bg-orange-500 bg-opacity-20 rounded-lg p-2">
-                <svg
-                  class="w-5 h-5 text-orange-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
-                  />
-                </svg>
-              </div>
-              <span class="font-medium">Manage Categories</span>
-            </div>
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+      <TotalExpense v-if="summary.expense" :expense="summary.expense" />
     </div>
 
     <!-- Recent Transactions & Categories -->
