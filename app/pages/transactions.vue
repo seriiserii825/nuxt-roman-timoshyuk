@@ -16,7 +16,7 @@
   })
 
   const page = ref(1)
-  const limit = ref(4)
+  const limit = ref(5)
   const total_pages = ref(0)
   const is_chart_visible = ref(false)
 
@@ -138,7 +138,7 @@
       @emit_delete="deleteTransaction"
     />
     <Pagination
-      v-if="transactions && transactions.length > limit"
+      v-if="total_pages > 1"
       :current-page="page"
       :total-pages="total_pages"
       :window="2"
