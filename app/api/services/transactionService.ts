@@ -7,7 +7,7 @@ export const transactionService = {
   },
   getAllWithPagination: async (page: number, limit: number) => {
     const { $axios } = useNuxtApp()
-    return $axios.get(`/transactions/pagination?page=${page}&limit=${limit}`)
+    return $axios.get(`/transactions?page=${page}&limit=${limit}`)
   },
   getSummary: async () => {
     const { $axios } = useNuxtApp()
