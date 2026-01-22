@@ -5,7 +5,6 @@
   import { transactionService } from '~/api/services/transactionService'
   import TransactionForm from '~/components/Transaction/TransactionForm.vue'
   import useSweetAlert from '~/composable/useSweetAlert'
-  import type { ISummary } from '~/interfaces/ISummary'
   import type { ITransaction } from '~/interfaces/ITransaction'
   import type { ITransactionWithPagination } from '~/interfaces/ITransactionWithPagination.ts'
 
@@ -15,6 +14,9 @@
     middleware: 'auth',
   })
 
+  const summary_store = useSummaryStore()
+  const { summary } = storeToRefs(summary_store)
+
   const page = ref(1)
   const limit = ref(5)
   const total_pages = ref(0)
@@ -23,10 +25,6 @@
   const transaction_is_loading = ref(false)
   const transactions = ref<ITransaction[]>([])
   const is_transaction_popup_visible = ref(false)
-  const summary = ref<ISummary>({
-    income: 0,
-    expense: 0,
-  })
 
   async function getTransactions() {
     try {
@@ -74,7 +72,10 @@
   async function getSummary() {
     try {
       const response = await transactionService.getSummary()
-      summary.value = response.data
+      summary_store.setSummary({
+        income: response.data.income,
+        expense: response.data.expense,
+      })
       if (!chart.value.datasets[0]) return
       chart.value.datasets[0].data = [
         summary.value.income,
