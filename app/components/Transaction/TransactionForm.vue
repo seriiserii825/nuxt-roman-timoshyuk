@@ -11,7 +11,7 @@
     title: '',
     amount: 0,
     type: 'income' as 'income' | 'expense',
-    categoryId: 0,
+    category: 0,
   })
 
   const categories = ref<ISelectOption[]>()
@@ -55,7 +55,7 @@
     form.value.title = ''
     form.value.amount = 0
     form.value.type = 'income'
-    form.value.categoryId = 0
+    form.value.category = 0
   }
 
   const form_are_valid = computed(() => {
@@ -63,7 +63,7 @@
       form.value.title.trim() !== '' &&
       form.value.amount > 0 &&
       (form.value.type === 'income' || form.value.type === 'expense') &&
-      form.value.categoryId > 0
+      form.value.category > 0
     )
   })
 
@@ -108,7 +108,7 @@
     <Preloader v-if="categories_is_loading" />
     <FormSelect
       v-else-if="categories"
-      v-model="form.categoryId"
+      v-model="form.category"
       label="Manage Category"
       name="category"
       :options="categories"

@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { categoryService } from '~/api/services/categoryService'
   import { transactionService } from '~/api/services/transactionService'
+  import setColorByPercent from '~/helpers/setColorByPercent'
   import type {
     ICategoryWithRating,
     ICategoryWithTransactions,
@@ -56,7 +57,6 @@
     categories: ICategoryWithTransactions[]
   ) {
     let maxCategoryTransactionPrice = 0
-    const randomColors = generateRandomColors(categories.length)
     categories.forEach((category) => {
       const totalCategoryTransactionPrice = category.transaction.reduce(
         (acc: number, transaction: ITransactionWithoutRelations) =>
@@ -76,37 +76,16 @@
       )
       const rating =
         (totalCategoryTransactionPrice / maxCategoryTransactionPrice) * 100
+
       return {
         ...category,
         rating,
         total: totalCategoryTransactionPrice,
-        color: randomColors[index] ?? 'hsl(0, 0%, 50%)',
+        color: setColorByPercent(rating),
       }
     })
-  }
-
-  function generateRandomColors(length: number): string[] {
-    const tailwindColors = [
-      'red',
-      'orange',
-      'amber',
-      'yellow',
-      'lime',
-      'green',
-      'emerald',
-      'teal',
-      'cyan',
-      'sky',
-      'blue',
-      'indigo',
-      'violet',
-      'purple',
-      'pink',
-      'rose',
-    ]
-
-    const shuffled = [...tailwindColors].sort(() => Math.random() - 0.5)
-    return shuffled.slice(0, Math.min(length, tailwindColors.length))
+    //sort categories by total descending
+    categories_with_rating.value.sort((a, b) => b.total - a.total)
   }
 </script>
 
