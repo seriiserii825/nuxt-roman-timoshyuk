@@ -51,7 +51,7 @@
             {{ transaction.type === 'expense' ? '-' : '+' }}
             {{ formatCurrency(transaction.amount) }}
           </td>
-          <td class="px-6 py-4">{{ transaction.categoryId.title }}</td>
+          <td class="px-6 py-4">{{ transaction.category.title }}</td>
           <td class="group relative cursor-pointer px-6 py-4">
             <span class="group-hover:hidden">{{
               formatDate(transaction.createdAt, true)

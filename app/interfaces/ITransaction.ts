@@ -3,7 +3,7 @@ export interface ITransaction {
   title: string
   amount: number
   type: string
-  categoryId: ICategory
+  category: ICategory
   createdAt: Date
   updatedAt: Date
   user: IUser
