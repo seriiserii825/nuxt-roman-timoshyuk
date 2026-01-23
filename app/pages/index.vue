@@ -1,12 +1,20 @@
 <script setup lang="ts">
+  import { categoryService } from '~/api/services/categoryService'
   import { transactionService } from '~/api/services/transactionService'
-  import type { ITransaction } from '~/interfaces/ITransaction'
+  import type {
+    ICategoryWithRating,
+    ICategoryWithTransactions,
+    ITransaction,
+    ITransactionWithoutRelations,
+  } from '~/interfaces/ITransaction'
 
   definePageMeta({
     middleware: 'auth',
   })
 
   const transactions = ref<ITransaction[]>([])
+
+  const categories_with_rating = ref<ICategoryWithRating[]>()
 
   const summary_store = useSummaryStore()
   const { balance, summary } = storeToRefs(summary_store)
@@ -33,6 +41,73 @@
     }
   }
   getRecentTransactions()
+
+  async function getCategoriesWithTransactions() {
+    try {
+      const response = await categoryService.getAllWithTransactions()
+      generateCategoriesWithRating(response.data)
+    } catch (error) {
+      handleAxiosError(error)
+    }
+  }
+  getCategoriesWithTransactions()
+
+  function generateCategoriesWithRating(
+    categories: ICategoryWithTransactions[]
+  ) {
+    let maxCategoryTransactionPrice = 0
+    const randomColors = generateRandomColors(categories.length)
+    categories.forEach((category) => {
+      const totalCategoryTransactionPrice = category.transaction.reduce(
+        (acc: number, transaction: ITransactionWithoutRelations) =>
+          acc + transaction.amount,
+        0
+      )
+      if (totalCategoryTransactionPrice > maxCategoryTransactionPrice) {
+        maxCategoryTransactionPrice = totalCategoryTransactionPrice
+      }
+    })
+
+    categories_with_rating.value = categories.map((category, index) => {
+      const totalCategoryTransactionPrice = category.transaction.reduce(
+        (acc: number, transaction: ITransactionWithoutRelations) =>
+          acc + transaction.amount,
+        0
+      )
+      const rating =
+        (totalCategoryTransactionPrice / maxCategoryTransactionPrice) * 100
+      return {
+        ...category,
+        rating,
+        total: totalCategoryTransactionPrice,
+        color: randomColors[index] ?? 'hsl(0, 0%, 50%)',
+      }
+    })
+  }
+
+  function generateRandomColors(length: number): string[] {
+    const tailwindColors = [
+      'red',
+      'orange',
+      'amber',
+      'yellow',
+      'lime',
+      'green',
+      'emerald',
+      'teal',
+      'cyan',
+      'sky',
+      'blue',
+      'indigo',
+      'violet',
+      'purple',
+      'pink',
+      'rose',
+    ]
+
+    const shuffled = [...tailwindColors].sort(() => Math.random() - 0.5)
+    return shuffled.slice(0, Math.min(length, tailwindColors.length))
+  }
 </script>
 
 <template>
@@ -61,68 +136,10 @@
         :transactions="transactions"
       />
       <!-- Top Categories -->
-      <div
-        class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700"
-      >
-        <div class="flex justify-between items-center mb-6">
-          <h3 class="text-xl font-semibold text-white">
-            Top Spending Categories
-          </h3>
-          <a href="#" class="text-blue-400 hover:text-blue-300 text-sm"
-            >View all</a
-          >
-        </div>
-        <div class="space-y-4">
-          <div>
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-gray-300">Shopping</span>
-              <span class="text-gray-400 text-sm">$8,999.00</span>
-            </div>
-            <div class="w-full bg-slate-700 rounded-full h-2">
-              <div
-                class="bg-gradient-to-r from-red-500 to-red-600 h-2 rounded-full"
-                style="width: 70%"
-              ></div>
-            </div>
-          </div>
-          <div>
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-gray-300">Expenses</span>
-              <span class="text-gray-400 text-sm">$3,800.00</span>
-            </div>
-            <div class="w-full bg-slate-700 rounded-full h-2">
-              <div
-                class="bg-gradient-to-r from-orange-500 to-orange-600 h-2 rounded-full"
-                style="width: 30%"
-              ></div>
-            </div>
-          </div>
-          <div>
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-gray-300">Food & Dining</span>
-              <span class="text-gray-400 text-sm">$1,250.00</span>
-            </div>
-            <div class="w-full bg-slate-700 rounded-full h-2">
-              <div
-                class="bg-gradient-to-r from-yellow-500 to-yellow-600 h-2 rounded-full"
-                style="width: 15%"
-              ></div>
-            </div>
-          </div>
-          <div>
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-gray-300">Transport</span>
-              <span class="text-gray-400 text-sm">$750.00</span>
-            </div>
-            <div class="w-full bg-slate-700 rounded-full h-2">
-              <div
-                class="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full"
-                style="width: 10%"
-              ></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <TopSpendingCategories
+        v-if="categories_with_rating"
+        :categories="categories_with_rating"
+      />
     </div>
   </main>
 </template>
