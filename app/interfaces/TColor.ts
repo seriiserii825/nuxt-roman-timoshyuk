@@ -1,8 +1,8 @@
 export type TColorName =
   | 'red'
   | 'orange'
-  | 'amber'
   | 'yellow'
+  | 'yellowgreen'
   | 'lime'
   | 'green'
   | 'emerald'

@@ -15,7 +15,9 @@
   <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700">
     <div class="flex justify-between items-center mb-6">
       <h3 class="text-xl font-semibold text-white">Top Spending Categories</h3>
-      <NuxtLink href="#" class="text-blue-400 hover:text-blue-300 text-sm"
+      <NuxtLink
+        to="/categories"
+        class="text-blue-400 hover:text-blue-300 text-sm"
         >View all</NuxtLink
       >
     </div>

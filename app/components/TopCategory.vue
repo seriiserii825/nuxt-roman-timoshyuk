@@ -4,11 +4,14 @@
   import formatCurrency from '~/helpers/formatCurrency'
   import type { ICategoryWithRating } from '~/interfaces/ITransaction'
 
-  defineProps({
+  const props = defineProps({
     category: {
       type: Object as PropType<ICategoryWithRating>,
       required: true,
     },
+  })
+  const settings = computed(() => {
+    return `width: ${props.category.rating}%; background: ${props.category.color};`
   })
 </script>
 
@@ -22,10 +25,7 @@
         }}</span>
       </div>
       <div class="w-full bg-slate-700 rounded-full h-2">
-        <div
-          class="h-2 rounded-full"
-          :style="`width: ${category.rating}%; background: ${category.color};`"
-        ></div>
+        <div class="h-2 rounded-full" :style="settings"></div>
       </div>
     </div>
   </div>
