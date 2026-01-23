@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import formatCurrency from '~/helpers/formatCurrency'
+
   defineProps({
     balance: {
       type: Number,
@@ -14,7 +16,9 @@
     <div class="flex justify-between items-start mb-4">
       <div>
         <p class="text-blue-100 text-sm mb-1">Total Balance</p>
-        <h2 class="text-3xl font-bold text-white">{{ balance }}$</h2>
+        <h2 class="text-3xl font-bold text-white">
+          {{ formatCurrency(balance) }}
+        </h2>
       </div>
       <div class="bg-blue-500 bg-opacity-50 rounded-lg p-3">
         <svg

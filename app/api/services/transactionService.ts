@@ -5,6 +5,10 @@ export const transactionService = {
     const { $axios } = useNuxtApp()
     return $axios.get('/transactions')
   },
+  getRecent: async () => {
+    const { $axios } = useNuxtApp()
+    return $axios.get('/transactions/recent')
+  },
   getAllWithPagination: async (page: number, limit: number) => {
     const { $axios } = useNuxtApp()
     return $axios.get(`/transactions?page=${page}&limit=${limit}`)

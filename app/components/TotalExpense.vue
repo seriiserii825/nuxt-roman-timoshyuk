@@ -1,5 +1,7 @@
 <script setup lang="ts">
-  const props = defineProps({
+  import formatCurrency from '~/helpers/formatCurrency'
+
+  defineProps({
     expense: {
       type: Number,
       required: true,
@@ -12,7 +14,9 @@
     <div class="flex justify-between items-start mb-4">
       <div>
         <p class="text-gray-400 text-sm mb-1">Total Expenses</p>
-        <h2 class="text-3xl font-bold text-red-400">{{ expense }}$</h2>
+        <h2 class="text-3xl font-bold text-red-400">
+          {{ formatCurrency(expense) }}
+        </h2>
       </div>
       <div class="bg-red-500 bg-opacity-20 rounded-lg p-3">
         <svg

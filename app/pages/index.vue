@@ -1,9 +1,12 @@
 <script setup lang="ts">
   import { transactionService } from '~/api/services/transactionService'
+  import type { ITransaction } from '~/interfaces/ITransaction'
 
   definePageMeta({
     middleware: 'auth',
   })
+
+  const transactions = ref<ITransaction[]>([])
 
   const summary_store = useSummaryStore()
   const { balance, summary } = storeToRefs(summary_store)
@@ -20,6 +23,16 @@
     }
   }
   getSummary()
+
+  async function getRecentTransactions() {
+    try {
+      const response = await transactionService.getRecent()
+      transactions.value = response.data
+    } catch (error) {
+      handleAxiosError(error)
+    }
+  }
+  getRecentTransactions()
 </script>
 
 <template>
@@ -43,97 +56,10 @@
     <!-- Recent Transactions & Categories -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <!-- Recent Transactions -->
-      <div
-        class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700"
-      >
-        <div class="flex justify-between items-center mb-6">
-          <h3 class="text-xl font-semibold text-white">Recent Transactions</h3>
-          <a href="#" class="text-blue-400 hover:text-blue-300 text-sm"
-            >View all</a
-          >
-        </div>
-        <div class="space-y-4">
-          <div
-            class="flex items-center justify-between p-3 bg-slate-700 bg-opacity-50 rounded-lg"
-          >
-            <div class="flex items-center space-x-3">
-              <div class="bg-red-500 bg-opacity-20 rounded-lg p-2">
-                <svg
-                  class="w-5 h-5 text-red-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                  />
-                </svg>
-              </div>
-              <div>
-                <p class="text-white font-medium">A notebook</p>
-                <p class="text-gray-400 text-sm">January 22, 2026</p>
-              </div>
-            </div>
-            <span class="text-red-400 font-semibold">-$8,999.00</span>
-          </div>
-          <div
-            class="flex items-center justify-between p-3 bg-slate-700 bg-opacity-50 rounded-lg"
-          >
-            <div class="flex items-center space-x-3">
-              <div class="bg-green-500 bg-opacity-20 rounded-lg p-2">
-                <svg
-                  class="w-5 h-5 text-green-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
-                  />
-                </svg>
-              </div>
-              <div>
-                <p class="text-white font-medium">Gift for me</p>
-                <p class="text-gray-400 text-sm">January 22, 2026</p>
-              </div>
-            </div>
-            <span class="text-green-400 font-semibold">+$898.00</span>
-          </div>
-          <div
-            class="flex items-center justify-between p-3 bg-slate-700 bg-opacity-50 rounded-lg"
-          >
-            <div class="flex items-center space-x-3">
-              <div class="bg-red-500 bg-opacity-20 rounded-lg p-2">
-                <svg
-                  class="w-5 h-5 text-red-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
-                </svg>
-              </div>
-              <div>
-                <p class="text-white font-medium">For expense</p>
-                <p class="text-gray-400 text-sm">January 22, 2026</p>
-              </div>
-            </div>
-            <span class="text-red-400 font-semibold">-$3,800.00</span>
-          </div>
-        </div>
-      </div>
-
+      <RecentTransactions
+        v-if="transactions.length"
+        :transactions="transactions"
+      />
       <!-- Top Categories -->
       <div
         class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700"
